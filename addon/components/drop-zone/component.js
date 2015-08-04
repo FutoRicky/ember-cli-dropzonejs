@@ -70,11 +70,8 @@ export default Ember.Component.extend({
   reset: undefined,
   queuecomplete: undefined,
 
-
-  insertDropzone: Ember.on('didInsertElement', function(){
-    Dropzone.autoDiscover = false;
-
-    this.set('myDropzone', this.$().dropzone({
+  createDropzone(element){
+    this.set('myDropzone', new Dropzone(element,{
       url: this.url,
       method: this.method,
       parallelUploads: this.parallelUploads,
@@ -139,7 +136,11 @@ export default Ember.Component.extend({
       reset: this.reset,
       queuecomplete: this.queuecomplete,
     }));
+  },
 
+  insertDropzone: Ember.on('didInsertElement', function(){
+    Dropzone.autoDiscover = false;
+    this.createDropzone('div.dropzone');
     return this.myDropzone;
   })
 });
