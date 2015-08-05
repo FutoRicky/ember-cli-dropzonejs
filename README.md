@@ -19,3 +19,7 @@ example:
 `{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
 
 **Remember to add an url, it will not work without it**
+
+Demo
+-------------
+[DEMO](http://www.dropzonejs.com/examples/simple.html)
