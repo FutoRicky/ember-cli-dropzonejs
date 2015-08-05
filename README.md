@@ -1,25 +1,21 @@
 # Ember-cli-dropzonejs
 
-This README outlines the details of collaborating on this Ember addon.
+Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dropzonejs.com/).
 
-## Installation
+Installation
+-------------
+`ember install ember-cli-dropzonejs`
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+Usage
+-------------
+Simply add the component to your template like so: `{{drop-zone url='endpoint'}}`
 
-## Running
+You can see all properties in the [Dropzonejs](http://www.dropzonejs.com/) docs.
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+To set properties simply add the name of the property inside the component call and assign a value.
 
-## Running Tests
+example:
 
-* `ember test`
-* `ember test --server`
+`{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
 
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+**Remember to add an url, it will not work without it**
