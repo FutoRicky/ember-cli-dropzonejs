@@ -7,5 +7,6 @@ module.exports = {
     this._super.included(app);
 
     app.import('bower_components/dropzone/dist/dropzone.js');
+    app.import('bower_components/dropzone/dist/dropzone.css');
   }
 };
