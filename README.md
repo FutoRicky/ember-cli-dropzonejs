@@ -10,7 +10,7 @@ Usage
 -------------
 Simply add the component to your template like so: `{{drop-zone url='endpoint'}}`
 
-You can see all properties in the [Dropzonejs](http://www.dropzonejs.com/) docs.
+You can see all properties in the [Dropzonejs](http://www.dropzonejs.com/#configuration) docs.
 
 To set properties simply add the name of the property inside the component call and assign a value.
 
