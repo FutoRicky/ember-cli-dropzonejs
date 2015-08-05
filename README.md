@@ -5,6 +5,7 @@ Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dr
 Installation
 -------------
 `ember install ember-cli-dropzonejs`
+`bower install dropzone`
 
 Usage
 -------------
