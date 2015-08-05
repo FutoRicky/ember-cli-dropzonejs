@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   paramName: 'file',
   uploadMultiple: false,
   headers:undefined,
-  addremoveLinks: false,
+  addRemoveLinks: false,
   previewsContainer: null,
   clickable: true,
   maxThumbnailsize: 10, 
@@ -70,11 +70,8 @@ export default Ember.Component.extend({
   reset: undefined,
   queuecomplete: undefined,
 
-
-  insertDropzone: Ember.on('didInsertElement', function(){
-    Dropzone.autoDiscover = false;
-
-    this.set('myDropzone', this.$().dropzone({
+  createDropzone(element){
+    this.set('myDropzone', new Dropzone(element,{
       url: this.url,
       method: this.method,
       parallelUploads: this.parallelUploads,
@@ -83,7 +80,7 @@ export default Ember.Component.extend({
       paramName: this.paramName,
       uploadMultiple: this.uploadMultiple,
       headers: this.headers,
-      addremoveLinks: this.addremoveLinks,
+      addRemoveLinks: this.addRemoveLinks,
       previewsContainer: this.previewsContainer,
       clickable: this.clickable,
       maxThumbnailsize: this.maxThumbnailsize, 
@@ -139,7 +136,11 @@ export default Ember.Component.extend({
       reset: this.reset,
       queuecomplete: this.queuecomplete,
     }));
+  },
 
+  insertDropzone: Ember.on('didInsertElement', function(){
+    Dropzone.autoDiscover = false;
+    this.createDropzone('div.dropzone');
     return this.myDropzone;
   })
 });
