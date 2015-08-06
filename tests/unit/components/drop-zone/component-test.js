@@ -75,7 +75,7 @@ test('that options are being assigned properly', function(assert){
 
   component.set('thumbnailWidth', Math.floor(Math.random() * 10000));
 
-  component.set('thumnailHeight', Math.floor(Math.random() * 10000));
+  component.set('thumbnailHeight', Math.floor(Math.random() * 10000));
 
   let maxFilesArr = [null, Math.floor(Math.random() * 10000)];
   component.set('maxFiles', maxFilesArr[Math.floor(Math.random() * maxFilesArr.length)]);
