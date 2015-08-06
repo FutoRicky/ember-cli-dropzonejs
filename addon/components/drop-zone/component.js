@@ -105,36 +105,36 @@ export default Ember.Component.extend({
 
       // Events
 
-      // All of these receive the event as first parameter:
-      drop: this.drop,
-      dragstart: this.dragstart,
-      dragend: this.dragend,
-      dragenter: this.dragenter,
-      dragover: this.dragover,
-      dragleave: this.dragleave,
-      // All of these receive the file as first parameter: 
-      addedfile: this.addedfile,
-      removedfile: this.removedfile,
-      thumbnail: this.thumbnail,
-      error: this.error,
-      processing: this.processing,
-      uploadprogress: this.uploadprogress,
-      sending: this.sending,
-      success: this.success,
-      complete: this.complete,
-      canceled: this.canceled,
-      maxfilesreached: this.maxfilesreached,
-      maxfilesexceeded : this.maxfilesexceeded ,
-      // All of these receive a list of files as first parameter and are only called if the uploadMultiple option is true: 
-      processingmultiple: this.processingmultiple,
-      sendingmultiple: this.sendingmultiple,
-      successmultiple: this.successmultiple,
-      completemultiple: this.completemultiple,
-      canceledmultiple: this.canceledmultiple,
-      //Special events:
-      totaluploadprogress: this.totaluploadprogress,
-      reset: this.reset,
-      queuecomplete: this.queuecomplete,
+      // // All of these receive the event as first parameter:
+      // drop: this.drop,
+      // dragstart: this.dragstart,
+      // dragend: this.dragend,
+      // dragenter: this.dragenter,
+      // dragover: this.dragover,
+      // dragleave: this.dragleave,
+      // // All of these receive the file as first parameter: 
+      // addedfile: this.addedfile,
+      // removedfile: this.removedfile,
+      // thumbnail: this.thumbnail,
+      // error: this.error,
+      // processing: this.processing,
+      // uploadprogress: this.uploadprogress,
+      // sending: this.sending,
+      // success: this.success,
+      // complete: this.complete,
+      // canceled: this.canceled,
+      // maxfilesreached: this.maxfilesreached,
+      // maxfilesexceeded : this.maxfilesexceeded ,
+      // // All of these receive a list of files as first parameter and are only called if the uploadMultiple option is true: 
+      // processingmultiple: this.processingmultiple,
+      // sendingmultiple: this.sendingmultiple,
+      // successmultiple: this.successmultiple,
+      // completemultiple: this.completemultiple,
+      // canceledmultiple: this.canceledmultiple,
+      // //Special events:
+      // totaluploadprogress: this.totaluploadprogress,
+      // reset: this.reset,
+      // queuecomplete: this.queuecomplete,
     }));
   },
 
