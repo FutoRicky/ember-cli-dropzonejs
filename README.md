@@ -26,4 +26,4 @@ example:
 
 Demo
 -------------
-[DEMO](http://www.dropzonejs.com/examples/simple.html)
+[DEMO](http://futoricky.github.io/ember-cli-dropzonejs/)
