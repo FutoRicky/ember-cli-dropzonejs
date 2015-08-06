@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-dropzonejs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Drag and drop file uploader addon using dropzonejs",
   "directories": {
     "doc": "doc",
@@ -60,6 +60,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoUrl": "http://futoricky.github.io/ember-cli-dropzonejs/"
+    "demoURL": "http://futoricky.github.io/ember-cli-dropzonejs/"
   }
 }
