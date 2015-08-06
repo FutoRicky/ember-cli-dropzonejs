@@ -5,11 +5,14 @@ Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dr
 Installation
 -------------
 `ember install ember-cli-dropzonejs`
+
+then 
+
 `bower install dropzone`
 
 Usage
 -------------
-Simply add the component to your template like so: `{{drop-zone url='endpoint'}}`
+Simply add the component to your template like so: `{{drop-zone url='/endpoint'}}`
 
 You can see all properties in the [Dropzonejs configuration docs](http://www.dropzonejs.com/#configuration).
 
