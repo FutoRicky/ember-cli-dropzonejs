@@ -6,7 +6,13 @@ module.exports = {
   included: function(app) {
     this._super.included(app);
 
+    var options = app.options.emberCliDropzonejs || {includeDropzoneCss: true};
+
     app.import('bower_components/dropzone/dist/dropzone.js');
-    app.import('bower_components/dropzone/dist/dropzone.css');
+
+    if (options.includeDropzoneCss){
+      app.import('bower_components/dropzone/dist/dropzone.css');
+    }
+
   }
 };
