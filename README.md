@@ -2,6 +2,8 @@
 
 Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dropzonejs.com/).
 
+[DEMO](http://futoricky.github.io/ember-cli-dropzonejs/)
+
 Installation
 -------------
 `ember install ember-cli-dropzonejs`
@@ -23,7 +25,3 @@ example:
 `{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
 
 **Remember to add an url, it will not work without it**
-
-Demo
--------------
-[DEMO](http://futoricky.github.io/ember-cli-dropzonejs/)
