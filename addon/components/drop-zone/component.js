@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   maxFiles: null,
   // resize
   acceptedFiles: null,
-  autoProccessQueue: null,
+  autoProcessQueue: null,
   forceFallback: null,
 
   // Dropzone translations
@@ -92,7 +92,7 @@ export default Ember.Component.extend({
       "thumbnailHeight",
       "maxFiles",
       "acceptedFiles",
-      "autoProccessQueue",
+      "autoProcessQueue",
       "forceFallback",
       "dictDefaultMessage",
       "dictFallbackMessage",
@@ -149,7 +149,7 @@ export default Ember.Component.extend({
       this.maxFiles,
       // resize
       this.acceptedFiles,
-      this.autoProccessQueue,
+      this.autoProcessQueue,
       this.forceFallback,
 
       // Dropzone translations
