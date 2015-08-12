@@ -8,9 +8,22 @@ Installation
 -------------
 `ember install ember-cli-dropzonejs`
 
-then 
+then
 
 `bower install dropzone`
+
+This addon will use dropzone's default css by default. If you prefer to use your own css, add this option to your `Brocfile.js`:
+
+```javascript
+var app = new EmberApp({
+  ---
+  emberCliDropzonejs: {
+    includeDropzoneCss: false
+  }
+  ---
+});
+```
+
 
 Usage
 -------------

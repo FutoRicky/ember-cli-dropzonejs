@@ -27,6 +27,7 @@ export default Ember.Component.extend({
   acceptedFiles: null,
   autoProcessQueue: null,
   forceFallback: null,
+  previewTemplate: null,
 
   // Dropzone translations
   dictDefaultMessage: null,
@@ -94,6 +95,7 @@ export default Ember.Component.extend({
       "acceptedFiles",
       "autoProcessQueue",
       "forceFallback",
+      "previewTemplate",
       "dictDefaultMessage",
       "dictFallbackMessage",
       "dictFallbackText",
@@ -151,6 +153,7 @@ export default Ember.Component.extend({
       this.acceptedFiles,
       this.autoProcessQueue,
       this.forceFallback,
+      this.previewTemplate,
 
       // Dropzone translations
       this.dictDefaultMessage,
