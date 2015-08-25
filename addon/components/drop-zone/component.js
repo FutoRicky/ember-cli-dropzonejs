@@ -48,7 +48,7 @@ export default Ember.Component.extend({
   dragstart: null,
   dragend: null,
   dragenter: null,
-  dragover: null,  
+  dragover: null,
   dragleave: null,
   // All of these receive the file as first parameter:
   addedfile: null,
@@ -58,7 +58,7 @@ export default Ember.Component.extend({
   processing: null,
   uploadprogress: null,
   sending: null,
-  success: null, 
+  success: null,
   complete: null,
   canceled: null,
   maxfilesreached: null,
@@ -68,11 +68,12 @@ export default Ember.Component.extend({
   sendingmultiple: null,
   successmultiple: null,
   completemultiple: null,
-  canceledmultiple: null, 
+  canceledmultiple: null,
   //Special events:
   totaluploadprogress: null,
   reset: null,
   queuecomplete: null,
+  files: null,
 
   getDropzoneOptions(){
     let dropzoneOptions = {};
@@ -81,7 +82,7 @@ export default Ember.Component.extend({
       "method",
       "parallelUploads",
       "maxFilesize",
-      "filesizeBase", 
+      "filesizeBase",
       "paramName",
       "uploadMultiple",
       "headers",
@@ -123,7 +124,7 @@ export default Ember.Component.extend({
       "complete",
       "canceled",
       "maxfilesreached",
-      "maxfilesexceeded", 
+      "maxfilesexceeded",
       "processingmultiple",
       "sendingmultiple",
       "successmultiple",
@@ -145,7 +146,7 @@ export default Ember.Component.extend({
       this.addRemoveLinks,
       this.previewsContainer,
       this.clickable,
-      this.maxThumbnailsize, 
+      this.maxThumbnailsize,
       this.thumbnailWidth,
       this.thumbnailHeight,
       this.maxFiles,
@@ -174,7 +175,7 @@ export default Ember.Component.extend({
       this.dragstart,
       this.dragend,
       this.dragenter,
-      this.dragover,  
+      this.dragover,
       this.dragleave,
       // All of these receive the file as first parameter:
       this.addedfile,
@@ -184,7 +185,7 @@ export default Ember.Component.extend({
       this.processing,
       this.uploadprogress,
       this.sending,
-      this.success, 
+      this.success,
       this.complete,
       this.canceled,
       this.maxfilesreached,
@@ -194,7 +195,7 @@ export default Ember.Component.extend({
       this.sendingmultiple,
       this.successmultiple,
       this.completemultiple,
-      this.canceledmultiple, 
+      this.canceledmultiple,
       //Special events:
       this.totaluploadprogress,
       this.reset,
@@ -214,9 +215,40 @@ export default Ember.Component.extend({
   },
 
   insertDropzone: Ember.on('didInsertElement', function(){
+    let self = this;
     this.getDropzoneOptions();
     Dropzone.autoDiscover = false;
     this.createDropzone('div.dropzone');
+
+    if ( this.files && this.files.length > 0 ) {
+
+      this.files.map( function( file ) {
+
+        let dropfile = {
+          name: file.get('name'),
+          type: file.get('type'),
+          size: file.get('size'),
+          status: Dropzone.ADDED
+        };
+        let thumbnail = file.get('thumbnail');
+
+        if ( typeof(thumbnail) === 'string' ) {
+
+          dropfile.thumbnail = thumbnail;
+        }
+
+        self.myDropzone.emit('addedfile', dropfile);
+
+        if ( typeof(thumbnail) === 'string' ) {
+
+          self.myDropzone.emit('thumbnail', dropfile, thumbnail);
+        }
+
+        self.myDropzone.emit('complete', dropfile);
+        self.myDropzone.files.push(file);
+      });
+    }
+
     return this.myDropzone;
   })
 });
