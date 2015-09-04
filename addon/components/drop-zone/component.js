@@ -74,6 +74,7 @@ export default Ember.Component.extend({
   totaluploadprogress: null,
   reset: null,
   queuecomplete: null,
+  files: null,
 
   getDropzoneOptions(){
     let dropzoneOptions = {};
@@ -217,9 +218,40 @@ export default Ember.Component.extend({
   },
 
   insertDropzone: Ember.on('didInsertElement', function(){
+    let self = this;
     this.getDropzoneOptions();
     Dropzone.autoDiscover = false;
     this.createDropzone('div.dropzone');
+
+    if ( this.files && this.files.length > 0 ) {
+
+      this.files.map( function( file ) {
+
+        let dropfile = {
+          name: file.get('name'),
+          type: file.get('type'),
+          size: file.get('size'),
+          status: Dropzone.ADDED
+        };
+        let thumbnail = file.get('thumbnail');
+
+        if ( typeof(thumbnail) === 'string' ) {
+
+          dropfile.thumbnail = thumbnail;
+        }
+
+        self.myDropzone.emit('addedfile', dropfile);
+
+        if ( typeof(thumbnail) === 'string' ) {
+
+          self.myDropzone.emit('thumbnail', dropfile, thumbnail);
+        }
+
+        self.myDropzone.emit('complete', dropfile);
+        self.myDropzone.files.push(file);
+      });
+    }
+
     return this.myDropzone;
   })
 });
