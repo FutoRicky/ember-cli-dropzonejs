@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   dropzoneOptions: null,
 
   url: '#',
+  withCredentials: null,
   method: null,
   parallelUploads: null,
   maxFilesize: null,
@@ -48,7 +49,7 @@ export default Ember.Component.extend({
   dragstart: null,
   dragend: null,
   dragenter: null,
-  dragover: null,  
+  dragover: null,
   dragleave: null,
   // All of these receive the file as first parameter:
   addedfile: null,
@@ -58,7 +59,7 @@ export default Ember.Component.extend({
   processing: null,
   uploadprogress: null,
   sending: null,
-  success: null, 
+  success: null,
   complete: null,
   canceled: null,
   maxfilesreached: null,
@@ -68,7 +69,7 @@ export default Ember.Component.extend({
   sendingmultiple: null,
   successmultiple: null,
   completemultiple: null,
-  canceledmultiple: null, 
+  canceledmultiple: null,
   //Special events:
   totaluploadprogress: null,
   reset: null,
@@ -81,7 +82,7 @@ export default Ember.Component.extend({
       "method",
       "parallelUploads",
       "maxFilesize",
-      "filesizeBase", 
+      "filesizeBase",
       "paramName",
       "uploadMultiple",
       "headers",
@@ -123,7 +124,7 @@ export default Ember.Component.extend({
       "complete",
       "canceled",
       "maxfilesreached",
-      "maxfilesexceeded", 
+      "maxfilesexceeded",
       "processingmultiple",
       "sendingmultiple",
       "successmultiple",
@@ -131,7 +132,8 @@ export default Ember.Component.extend({
       "canceledmultiple",
       "totaluploadprogress",
       "reset",
-      "queuecomplete"
+      "queuecomplete",
+      "withCredentials"
     ];
     let dropzoneProperties = [
       this.url,
@@ -145,7 +147,7 @@ export default Ember.Component.extend({
       this.addRemoveLinks,
       this.previewsContainer,
       this.clickable,
-      this.maxThumbnailsize, 
+      this.maxThumbnailsize,
       this.thumbnailWidth,
       this.thumbnailHeight,
       this.maxFiles,
@@ -174,7 +176,7 @@ export default Ember.Component.extend({
       this.dragstart,
       this.dragend,
       this.dragenter,
-      this.dragover,  
+      this.dragover,
       this.dragleave,
       // All of these receive the file as first parameter:
       this.addedfile,
@@ -184,7 +186,7 @@ export default Ember.Component.extend({
       this.processing,
       this.uploadprogress,
       this.sending,
-      this.success, 
+      this.success,
       this.complete,
       this.canceled,
       this.maxfilesreached,
@@ -194,11 +196,12 @@ export default Ember.Component.extend({
       this.sendingmultiple,
       this.successmultiple,
       this.completemultiple,
-      this.canceledmultiple, 
+      this.canceledmultiple,
       //Special events:
       this.totaluploadprogress,
       this.reset,
-      this.queuecomplete
+      this.queuecomplete,
+      this.withCredentials
     ];
 
     for( let i=0; i < dropzoneProperties.length; i++ ){
