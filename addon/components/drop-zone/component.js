@@ -70,11 +70,14 @@ export default Ember.Component.extend({
   successmultiple: null,
   completemultiple: null,
   canceledmultiple: null,
-  //Special events:
+  // Special events:
   totaluploadprogress: null,
   reset: null,
   queuecomplete: null,
   files: null,
+  
+  // Callback functions
+  accept: null,
 
   getDropzoneOptions(){
     let dropzoneOptions = {};
@@ -134,7 +137,8 @@ export default Ember.Component.extend({
       "totaluploadprogress",
       "reset",
       "queuecomplete",
-      "withCredentials"
+      "withCredentials",
+      "accept"
     ];
     let dropzoneProperties = [
       this.url,
@@ -202,7 +206,8 @@ export default Ember.Component.extend({
       this.totaluploadprogress,
       this.reset,
       this.queuecomplete,
-      this.withCredentials
+      this.withCredentials,
+      this.accept
     ];
 
     for( let i=0; i < dropzoneProperties.length; i++ ){
