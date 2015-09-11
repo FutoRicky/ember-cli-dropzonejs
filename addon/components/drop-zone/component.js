@@ -70,11 +70,13 @@ export default Ember.Component.extend({
   successmultiple: null,
   completemultiple: null,
   canceledmultiple: null,
-  //Special events:
+  // Special events:
   totaluploadprogress: null,
   reset: null,
   queuecomplete: null,
   files: null,
+  
+  // Callback functions
   accept: null,
 
   getDropzoneOptions(){
