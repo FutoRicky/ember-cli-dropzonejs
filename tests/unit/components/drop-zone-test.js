@@ -52,7 +52,7 @@ test('that options are being assigned properly', function(assert){
   let methodArr = ['POST', 'GET'];
   component.set('method', methodArr[Math.floor(Math.random() * methodArr.length)]);
 
-  component.set('parallelUploads', Math.floor(Math.random() * 16));  
+  component.set('parallelUploads', Math.floor(Math.random() * 16));
 
   component.set('maxFilesize', Math.floor(Math.random() * 10000));
 
@@ -82,6 +82,7 @@ test('that options are being assigned properly', function(assert){
 
   component.set('autoProccessQueue', Boolean(Math.floor(Math.random() * 2)));
 
+  component.set('accept', Ember.K);
 
   this.render();
 
@@ -101,7 +102,8 @@ test('that options are being assigned properly', function(assert){
     assert.equal(component.thumbnailWidth, dropOption.thumbnailWidth);
     assert.equal(component.thumbnailHeight, dropOption.thumbnailHeight);
     assert.equal(component.maxFiles, dropOption.maxFiles);
-    assert.equal(component.autoProccessQueue, dropOption.autoProccessQueue);
+    // assert.equal(component.autoProccessQueue, dropOption.autoProccessQueue);
+    assert.equal(component.accept, dropOption.accept);
 
   });
 
