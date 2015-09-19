@@ -6,6 +6,8 @@ export default Ember.Component.extend({
 
   myDropzone:undefined,
 
+  element: null,
+
   dropzoneOptions: null,
 
   url: '#',
@@ -75,7 +77,7 @@ export default Ember.Component.extend({
   reset: null,
   queuecomplete: null,
   files: null,
-  
+
   // Callback functions
   accept: null,
 
@@ -226,7 +228,7 @@ export default Ember.Component.extend({
     let self = this;
     this.getDropzoneOptions();
     Dropzone.autoDiscover = false;
-    this.createDropzone('div.dropzone');
+    this.createDropzone(this.element);
 
     if ( this.files && this.files.length > 0 ) {
 
