@@ -1,4 +1,5 @@
 # Ember-cli-dropzonejs
+[![Build Status](https://travis-ci.org/FutoRicky/ember-cli-dropzonejs.svg?branch=test%2Ftarvis-ci-implementation)](https://travis-ci.org/FutoRicky/ember-cli-dropzonejs)
 
 Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dropzonejs.com/).
 
