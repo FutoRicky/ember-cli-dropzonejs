@@ -213,7 +213,9 @@ export default Ember.Component.extend({
     ];
 
     for( let i=0; i < dropzoneProperties.length; i++ ){
-      if(dropzoneProperties[i] !== null){
+      if (dropzoneProperties[i] !== null){
+        dropzoneOptions[dropzoneKeys[i]] = dropzoneProperties[i];
+      } else if (dropzoneKeys[i] === this.thumbnailHeight || dropzoneKeys[i] === this.thumbnailWidth) {
         dropzoneOptions[dropzoneKeys[i]] = dropzoneProperties[i];
       }
     }

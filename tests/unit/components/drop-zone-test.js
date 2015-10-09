@@ -12,7 +12,7 @@ function stringGenerator(len){
 
     let charset = "abcdefghijklmnopqrstuvwxyz 0123456789";
 
-    for( var i=0; i < len; i++ ){
+    for( let i=0; i < len; i++ ){
       text += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     return text;
@@ -22,7 +22,7 @@ test('it renders', function(assert) {
   assert.expect(2);
 
   // Creates the component instance
-  var component = this.subject();
+  let component = this.subject();
   assert.equal(component._state, 'preRender');
 
   // Renders the component to the page
