@@ -4,18 +4,18 @@ import { moduleForComponent, test } from 'ember-qunit';
 moduleForComponent('drop-zone', 'Unit | Component | drop zone', {
   // Specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar'],
-  unit: true
+  unit: true,
 });
 
-function stringGenerator(len){
-    let text = " ";
+function stringGenerator(len) {
+  let text = ' ';
+  let charset = 'abcdefghijklmnopqrstuvwxyz 0123456789';
 
-    let charset = "abcdefghijklmnopqrstuvwxyz 0123456789";
+  for (let i = 0; i < len; i++) {
+    text += charset.charAt(Math.floor(Math.random() * charset.length));
+  }
 
-    for( let i=0; i < len; i++ ){
-      text += charset.charAt(Math.floor(Math.random() * charset.length));
-    }
-    return text;
+  return text;
 }
 
 test('it renders', function(assert) {
@@ -38,7 +38,7 @@ test('that is being initialized', function(assert) {
   });
 });
 
-test('that options are being assigned properly', function(assert){
+test('that options are being assigned properly', function(assert) {
   let component = this.subject();
 
   // not tested:
@@ -64,7 +64,7 @@ test('that options are being assigned properly', function(assert){
 
   component.set('uploadMultiple', Boolean(Math.floor(Math.random() * 2)));
 
-  let headersArr = [undefined, {'auth': stringGenerator(20)}];
+  let headersArr = [undefined, { auth: stringGenerator(20) }];
   component.set('headers', headersArr[Math.floor(Math.random() * headersArr.length)]);
 
   component.set('addRemoveLinks', Boolean(Math.floor(Math.random() * 2)));
@@ -81,8 +81,6 @@ test('that options are being assigned properly', function(assert){
   component.set('maxFiles', maxFilesArr[Math.floor(Math.random() * maxFilesArr.length)]);
 
   component.set('autoProccessQueue', Boolean(Math.floor(Math.random() * 2)));
-
-  component.set('accept', Ember.K);
 
   this.render();
 
@@ -102,14 +100,12 @@ test('that options are being assigned properly', function(assert){
     assert.equal(component.thumbnailWidth, dropOption.thumbnailWidth);
     assert.equal(component.thumbnailHeight, dropOption.thumbnailHeight);
     assert.equal(component.maxFiles, dropOption.maxFiles);
-    // assert.equal(component.autoProccessQueue, dropOption.autoProccessQueue);
-    assert.equal(component.accept, dropOption.accept);
 
   });
 
 });
 
-test('that translations are being set', function(assert){
+test('that translations are being set', function(assert) {
   let component = this.subject();
 
   component.set('dictDefaultMessage', stringGenerator(Math.floor(Math.random() * 100)));
