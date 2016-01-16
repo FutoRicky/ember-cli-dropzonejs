@@ -26,6 +26,7 @@ export default Ember.Component.extend({
   thumbnailWidth: null,
   thumbnailHeight: null,
   maxFiles: null,
+
   // resize
   acceptedFiles: null,
   autoProcessQueue: null,
@@ -53,6 +54,7 @@ export default Ember.Component.extend({
   dragenter: null,
   dragover: null,
   dragleave: null,
+
   // All of these receive the file as first parameter:
   addedfile: null,
   removedfile: null,
@@ -65,13 +67,15 @@ export default Ember.Component.extend({
   complete: null,
   canceled: null,
   maxfilesreached: null,
-  maxfilesexceeded : null,
+  maxfilesexceeded: null,
+
   // All of these receive a list of files as first parameter and are only called if the uploadMultiple option is true:
   processingmultiple: null,
   sendingmultiple: null,
   successmultiple: null,
   completemultiple: null,
   canceledmultiple: null,
+
   // Special events:
   totaluploadprogress: null,
   reset: null,
@@ -81,66 +85,66 @@ export default Ember.Component.extend({
   // Callback functions
   accept: null,
 
-  getDropzoneOptions(){
+  getDropzoneOptions() {
     let dropzoneOptions = {};
     let dropzoneKeys = [
-      "url",
-      "method",
-      "parallelUploads",
-      "maxFilesize",
-      "filesizeBase",
-      "paramName",
-      "uploadMultiple",
-      "headers",
-      "addRemoveLinks",
-      "previewsContainer",
-      "clickable",
-      "maxThumbnailsize",
-      "thumbnailWidth",
-      "thumbnailHeight",
-      "maxFiles",
-      "acceptedFiles",
-      "autoProcessQueue",
-      "forceFallback",
-      "previewTemplate",
-      "dictDefaultMessage",
-      "dictFallbackMessage",
-      "dictFallbackText",
-      "dictInvalidFileType",
-      "dictFileTooBig",
-      "dictResponseError",
-      "dictCancelUpload",
-      "dictCancelUploadConfirmation",
-      "dictRemoveFile",
-      "dictMaxFilesExceeded",
-      "drop",
-      "dragstart",
-      "dragend",
-      "dragenter",
-      "dragover",
-      "dragleave",
-      "addedfile",
-      "removedfile",
-      "thumbnail",
-      "error",
-      "processing",
-      "uploadprogress",
-      "sending",
-      "success",
-      "complete",
-      "canceled",
-      "maxfilesreached",
-      "maxfilesexceeded",
-      "processingmultiple",
-      "sendingmultiple",
-      "successmultiple",
-      "completemultiple",
-      "canceledmultiple",
-      "totaluploadprogress",
-      "reset",
-      "queuecomplete",
-      "withCredentials",
-      "accept"
+      'url',
+      'method',
+      'parallelUploads',
+      'maxFilesize',
+      'filesizeBase',
+      'paramName',
+      'uploadMultiple',
+      'headers',
+      'addRemoveLinks',
+      'previewsContainer',
+      'clickable',
+      'maxThumbnailsize',
+      'thumbnailWidth',
+      'thumbnailHeight',
+      'maxFiles',
+      'acceptedFiles',
+      'autoProcessQueue',
+      'forceFallback',
+      'previewTemplate',
+      'dictDefaultMessage',
+      'dictFallbackMessage',
+      'dictFallbackText',
+      'dictInvalidFileType',
+      'dictFileTooBig',
+      'dictResponseError',
+      'dictCancelUpload',
+      'dictCancelUploadConfirmation',
+      'dictRemoveFile',
+      'dictMaxFilesExceeded',
+      'drop',
+      'dragstart',
+      'dragend',
+      'dragenter',
+      'dragover',
+      'dragleave',
+      'addedfile',
+      'removedfile',
+      'thumbnail',
+      'error',
+      'processing',
+      'uploadprogress',
+      'sending',
+      'success',
+      'complete',
+      'canceled',
+      'maxfilesreached',
+      'maxfilesexceeded',
+      'processingmultiple',
+      'sendingmultiple',
+      'successmultiple',
+      'completemultiple',
+      'canceledmultiple',
+      'totaluploadprogress',
+      'reset',
+      'queuecomplete',
+      'withCredentials',
+      'accept',
     ];
     let dropzoneProperties = [
       this.url,
@@ -158,6 +162,7 @@ export default Ember.Component.extend({
       this.thumbnailWidth,
       this.thumbnailHeight,
       this.maxFiles,
+
       // resize
       this.acceptedFiles,
       this.autoProcessQueue,
@@ -185,6 +190,7 @@ export default Ember.Component.extend({
       this.dragenter,
       this.dragover,
       this.dragleave,
+
       // All of these receive the file as first parameter:
       this.addedfile,
       this.removedfile,
@@ -198,69 +204,69 @@ export default Ember.Component.extend({
       this.canceled,
       this.maxfilesreached,
       this.maxfilesexceeded,
+
       // All of these receive a list of files as first parameter and are only called if the uploadMultiple option is true:
       this.processingmultiple,
       this.sendingmultiple,
       this.successmultiple,
       this.completemultiple,
       this.canceledmultiple,
+
       //Special events:
       this.totaluploadprogress,
       this.reset,
       this.queuecomplete,
       this.withCredentials,
-      this.accept
+      this.accept,
     ];
 
-    for( let i=0; i < dropzoneProperties.length; i++ ){
-      if (dropzoneProperties[i] !== null){
+    for (let i = 0; i < dropzoneProperties.length; i++) {
+      if (dropzoneProperties[i] !== null) {
         dropzoneOptions[dropzoneKeys[i]] = dropzoneProperties[i];
       } else if (dropzoneKeys[i] === this.thumbnailHeight || dropzoneKeys[i] === this.thumbnailWidth) {
         dropzoneOptions[dropzoneKeys[i]] = dropzoneProperties[i];
       }
     }
+
     this.set('dropzoneOptions', dropzoneOptions);
   },
 
-  createDropzone(element){
+  createDropzone(element) {
     this.set('myDropzone', new Dropzone(element, this.dropzoneOptions));
   },
 
-  insertDropzone: Ember.on('didInsertElement', function(){
-    let self = this;
+  insertDropzone: Ember.on('didInsertElement', function() {
+    let _this = this;
     this.getDropzoneOptions();
     Dropzone.autoDiscover = false;
     this.createDropzone(this.element);
 
-    if ( this.files && this.files.length > 0 ) {
-
-      this.files.map( function( file ) {
-
+    if (this.files && this.files.length > 0) {
+      this.files.map(function(file) {
         let dropfile = {
           name: file.get('name'),
           type: file.get('type'),
           size: file.get('size'),
-          status: Dropzone.ADDED
+          status: Dropzone.ADDED,
         };
         let thumbnail = file.get('thumbnail');
 
-        if ( typeof(thumbnail) === 'string' ) {
-
+        if (typeof (thumbnail) === 'string') {
           dropfile.thumbnail = thumbnail;
         }
 
-        self.myDropzone.emit('addedfile', dropfile);
+        _this.myDropzone.emit('addedfile', dropfile);
 
-        if ( typeof(thumbnail) === 'string' ) {
+        if (typeof (thumbnail) === 'string') {
 
-          self.myDropzone.emit('thumbnail', dropfile, thumbnail);
+          _this.myDropzone.emit('thumbnail', dropfile, thumbnail);
         }
 
-        self.myDropzone.emit('complete', dropfile);
-        self.myDropzone.files.push(file);
+        _this.myDropzone.emit('complete', dropfile);
+        _this.myDropzone.files.push(file);
       });
     }
 
     return this.myDropzone;
-  })
+  }),
 });
