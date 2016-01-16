@@ -38,4 +38,22 @@ example:
 
 `{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
 
-**Remember to add an url, it will not work without it**
+####Event Handling
+[Dropzonejs Events Docs](http://www.dropzonejs.com/#events)
+
+
+To use events, set your event handler in your controller like so:
+
+```
+  addedFileEvent: Ember.computed(function() {
+    return function() {
+      // do something...
+    };
+  }),
+```
+
+and set it in your component declaration:
+
+`{{drop-zone url='http://example.com/example' addfile=addedFileEvent}}`
+
+**Remember to add an url, this addon will not work without it**
