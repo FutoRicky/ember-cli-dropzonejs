@@ -39,6 +39,8 @@ example:
 `{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
 
 ####Event Handling
+[Dropzonejs Events Docs](http://www.dropzonejs.com/#events)
+
 
 To use events, set your event handler in your controller like so:
 
