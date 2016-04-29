@@ -71,7 +71,7 @@ test('that options are being assigned properly', function(assert) {
 
   component.set('clickable', Boolean(Math.floor(Math.random() * 2)));
 
-  component.set('maxThumbnailsize', Math.floor(Math.random() * 10000));
+  component.set('maxThumbnailFilesize', Math.floor(Math.random() * 10000));
 
   component.set('thumbnailWidth', Math.floor(Math.random() * 10000));
 
@@ -96,7 +96,7 @@ test('that options are being assigned properly', function(assert) {
     assert.equal(component.headers, dropOption.headers);
     assert.equal(component.addRemoveLinks, dropOption.addRemoveLinks);
     assert.equal(component.clickable, dropOption.clickable);
-    assert.equal(component.maxThumbnailsize, dropOption.maxThumbnailsize);
+    assert.equal(component.maxThumbnailFilesize, dropOption.maxThumbnailFilesize);
     assert.equal(component.thumbnailWidth, dropOption.thumbnailWidth);
     assert.equal(component.thumbnailHeight, dropOption.thumbnailHeight);
     assert.equal(component.maxFiles, dropOption.maxFiles);
