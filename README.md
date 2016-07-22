@@ -54,3 +54,12 @@ and set it in your component declaration:
 `{{drop-zone url='http://example.com/example' addfile=addedFileEvent}}`
 
 **Remember to add an url, this addon will not work without it**
+
+Contributions
+-------------
+
+All contributions are welcomed and encouraged.
+
+Please make all pull requests to the `dev` branch.
+
+Thanks!
