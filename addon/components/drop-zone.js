@@ -131,7 +131,7 @@ export default Ember.Component.extend({
     const onDragEnterLeaveHandler = function(dropzoneInstance) {
       const onDrag = ( element => {
         let dragCounter = 0;
-        
+
         return {
           enter(event) {
             event.preventDefault();
@@ -140,18 +140,18 @@ export default Ember.Component.extend({
           },
           leave() {
             dragCounter--;
-            
+
             if (dragCounter === 0) {
               element.classList.remove('dz-drag-hover');
             }
           }
         };
-      })(dropzoneInstance.element);
-      
+      }).call(dropzoneInstance.element);
+
       dropzoneInstance.on('dragenter', onDrag.enter);
       dropzoneInstance.on('dragleave', onDrag.leave);
     };
-    
+
     let dropzoneOptions = {};
     let dropzoneConfig = {
       url: this.url,
@@ -188,7 +188,7 @@ export default Ember.Component.extend({
       dictCancelUploadConfirmation: this.dictCancelUploadConfirmation,
       dictRemoveFile: this.dictRemoveFile,
       dictMaxFilesExceeded: this.dictMaxFilesExceeded,
-      
+
       // Fix flickering dragging over child elements: https://github.com/enyo/dropzone/issues/438
       dragenter: Ember.$.noop,
       dragleave: Ember.$.noop,
