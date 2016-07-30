@@ -1,5 +1,6 @@
 # Ember-cli-dropzonejs
 [![Build Status](https://travis-ci.org/FutoRicky/ember-cli-dropzonejs.svg?branch=test%2Ftarvis-ci-implementation)](https://travis-ci.org/FutoRicky/ember-cli-dropzonejs)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-dropzonejs.svg)](https://emberobserver.com/addons/ember-cli-dropzonejs)
 
 Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dropzonejs.com/).
 
@@ -53,3 +54,12 @@ and set it in your component declaration:
 `{{drop-zone url='http://example.com/example' addfile=addedFileEvent}}`
 
 **Remember to add an url, this addon will not work without it**
+
+Contributions
+-------------
+
+All contributions are welcomed and encouraged.
+
+Please make all pull requests to the `dev` branch.
+
+Thanks!
