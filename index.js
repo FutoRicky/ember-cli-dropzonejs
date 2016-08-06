@@ -10,11 +10,11 @@ module.exports = {
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
       // This will only be included in the browser build
-      app.import('bower_components/dropzone/dist/dropzone.js');
+      app.import(app.bowerDirectory + '/dropzone/dist/dropzone.js');
     }
 
     if (options.includeDropzoneCss){
-      app.import('bower_components/dropzone/dist/dropzone.css');
+      app.import(app.bowerDirectory + '/dropzone/dist/dropzone.css');
     }
 
   }
