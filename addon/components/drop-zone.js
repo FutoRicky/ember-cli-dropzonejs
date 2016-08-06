@@ -28,6 +28,7 @@ export default Ember.Component.extend({
   thumbnailWidth: null,
   thumbnailHeight: null,
   maxFiles: null,
+  createImageThumbnails: null,
 
   // resize: not available
   acceptedFiles: null,
@@ -170,6 +171,7 @@ export default Ember.Component.extend({
       thumbnailWidth: this.thumbnailWidth,
       thumbnailHeight: this.thumbnailHeight,
       maxFiles: this.maxFiles,
+      createImageThumbnails: this.createImageThumbnails,
 
       // resize: not available
       acceptedFiles: this.acceptedFiles,
