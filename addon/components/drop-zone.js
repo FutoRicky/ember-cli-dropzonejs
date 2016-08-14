@@ -146,7 +146,7 @@ export default Ember.Component.extend({
             }
           }
         };
-      }).call(dropzoneInstance.element);
+      }).call(this, dropzoneInstance.element);
 
       dropzoneInstance.on('dragenter', onDrag.enter);
       dropzoneInstance.on('dragleave', onDrag.leave);
