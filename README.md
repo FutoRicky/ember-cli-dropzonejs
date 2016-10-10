@@ -6,6 +6,13 @@ Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dr
 
 [DEMO](http://futoricky.github.io/ember-cli-dropzonejs/)
 
+Versions
+-------------
+Current version is running ember-cli >= `2.8.0`
+
+Versions 0.8.6 <= are running ember-cli `1.13.8` 
+
+
 Installation
 -------------
 `ember install ember-cli-dropzonejs`
