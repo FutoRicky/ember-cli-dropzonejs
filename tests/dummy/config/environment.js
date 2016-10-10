@@ -38,7 +38,7 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/';
+    ENV.rootUrl = '/';
     ENV.locationType = 'none';
 
     // keep test console output quieter
@@ -49,7 +49,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/ember-cli-dropzonejs';
+    ENV.rootUrl = '/ember-cli-dropzonejs';
   }
 
   return ENV;
