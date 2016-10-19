@@ -5,9 +5,7 @@ export default Ember.Component.extend({
   classNames: ['dropzone'],
 
   myDropzone:undefined,
-
-  element: null,
-
+  
   dropzoneOptions: null,
 
   // Configuration Options
