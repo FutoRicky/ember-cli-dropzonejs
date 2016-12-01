@@ -4,7 +4,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['dropzone'],
 
-  myDropzone:undefined,
+  myDropzone: document.body || undefined,
   
   dropzoneOptions: null,
 
@@ -45,6 +45,9 @@ export default Ember.Component.extend({
   dictCancelUploadConfirmation: null,
   dictRemoveFile: null,
   dictMaxFilesExceeded: null,
+
+  // Bonus for full screen zones
+  maxDropRegion: null,
 
   // Events
 
@@ -208,7 +211,8 @@ export default Ember.Component.extend({
   },
 
   createDropzone(element) {
-    this.set('myDropzone', new Dropzone(element, this.dropzoneOptions));
+    let region = this.get('maxDropRegion') ? document.body : element;
+    this.set('myDropzone', new Dropzone(region, this.dropzoneOptions));
   },
 
   insertDropzone: Ember.on('didInsertElement', function() {
