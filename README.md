@@ -10,7 +10,7 @@ Versions
 -------------
 Current version is running ember-cli >= `2.8.0`
 
-Versions 0.8.6 <= are running ember-cli `1.13.8` 
+Versions 0.8.6 <= are running ember-cli `1.13.8`
 
 
 Installation
@@ -41,6 +41,8 @@ To set properties simply add the name of the property inside the component call 
 example:
 
 `{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
+
+If you would like to use the whole document body as a drop location you can set `maxDropRegion` to true
 
 ####Event Handling
 [Dropzonejs Events Docs](http://www.dropzonejs.com/#events)
