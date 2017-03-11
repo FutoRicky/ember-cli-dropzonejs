@@ -60,7 +60,7 @@ To use events, set your event handler in your controller like so:
 
 and set it in your component declaration:
 
-`{{drop-zone url='http://example.com/example' addfile=addedFileEvent}}`
+`{{drop-zone url='http://example.com/example' addedfile=addedFileEvent}}`
 
 **Remember to add an url, this addon will not work without it**
 
