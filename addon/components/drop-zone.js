@@ -215,6 +215,10 @@ export default Ember.Component.extend({
     this.set('myDropzone', new Dropzone(region, this.dropzoneOptions));
   },
 
+  destroyDropzone: Ember.on('willDestroyElement', function() {
+    this.get('myDropzone').destroy();
+  }),
+
   insertDropzone: Ember.on('didInsertElement', function() {
     let _this = this;
     this.getDropzoneOptions();
