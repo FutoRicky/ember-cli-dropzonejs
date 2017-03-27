@@ -177,7 +177,7 @@ export default Ember.Component.extend({
         Ember.$(this.element).addClass('dz-drag-hover');
       },
       dragleave: function(e) {
-        this.dragEnteredEls = $(this.dragEnteredEls).not(e.target);
+        this.dragEnteredEls = Ember.$(this.dragEnteredEls).not(e.target);
         if (this.dragEnteredEls.length === 0) {
           Ember.$(this.element).removeClass('dz-drag-hover');
         }
