@@ -13,13 +13,19 @@ module.exports = {
     this.import('vendor/dropzone.min.css');
   },
   treeForVendor(vendorTree) {
-    var dropzoneTree = new Funnel(
+    let trees = [];
+    let dropzoneTree = new Funnel(
       path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
       {
         files: ['dropzone.min.js', 'dropzone.min.css']
       }
     );
 
-    return new MergeTrees([vendorTree, dropzoneTree]);
+    trees.push(dropzoneTree);
+
+    if (vendorTree) {
+      trees.push(vendorTree);
+    }
+    return new MergeTrees(trees);
   }
 };
