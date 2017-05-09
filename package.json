@@ -16,6 +16,8 @@
     "url": "https://github.com/FutoRicky/ember-cli-dropzonejs.git"
   },
   "dependencies": {
+    "broccoli-funnel": "^1.2.0",
+    "broccoli-merge-trees": "^2.0.0",
     "ember-cli-babel": "^6.0.0"
   },
   "author": "Ricardo Mercado <hello@RicardoAMercado.com>",
@@ -30,7 +32,6 @@
     "ember-cli-htmlbars": "^1.1.1",
     "ember-cli-htmlbars-inline-precompile": "^0.4.0",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-node-modules-to-vendor": "^0.2.0",
     "ember-cli-qunit": "^4.0.0",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
