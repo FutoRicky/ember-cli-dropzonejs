@@ -1,12 +1,5 @@
 {
   "name": "ember-cli-dropzonejs",
   "dependencies": {
-    "dropzone": "^4.3.0",
-    "jquery": "1.11.3",
-    "ember": "~2.8.0",
-    "ember-cli-shims": "0.1.1"
-  },
-  "resolutions": {
-    "ember": ">=1.4"
   }
 }
