@@ -44,7 +44,7 @@ example:
 
 If you would like to use the whole document body as a drop location you can set `maxDropRegion` to true
 
-####Event Handling
+#### Event Handling
 [Dropzonejs Events Docs](http://www.dropzonejs.com/#events)
 
 
