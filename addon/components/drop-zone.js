@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNames: ['dropzone'],
 
   myDropzone: document.body || undefined,
-  
+
   dropzoneOptions: null,
 
   // Configuration Options
@@ -27,6 +27,9 @@ export default Ember.Component.extend({
   thumbnailHeight: null,
   maxFiles: null,
   createImageThumbnails: null,
+
+  //params hash
+  params: null,
 
   // resize: not available
   acceptedFiles: null,
@@ -173,7 +176,8 @@ export default Ember.Component.extend({
       thumbnailHeight: this.thumbnailHeight,
       maxFiles: this.maxFiles,
       createImageThumbnails: this.createImageThumbnails,
-
+      params: this.params,
+      
       // resize: not available
       acceptedFiles: this.acceptedFiles,
       autoProcessQueue: this.autoProcessQueue,
@@ -237,7 +241,7 @@ export default Ember.Component.extend({
           size: file.get('size'),
           status: Dropzone.ADDED,
           //add support for id  in files object so that it can be access in addedFile,removedFile callbacks for files identified by id
-          id: file.get('id') 
+          id: file.get('id')
         };
         let thumbnail = file.get('thumbnail');
 
