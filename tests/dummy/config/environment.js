@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node */
 
 module.exports = function(environment) {
   var ENV = {
@@ -19,6 +19,10 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'default-src': "'none' *",
+      },
+      EXTEND_PROTOTYPES: {
+      // Prevent Ember Data from overriding Date.parse.
+      Date: false,
       'script-src': "'self' 'unsafe-eval' *",
       'font-src': "'self' *",
       'connect-src': "'self' *",
@@ -29,7 +33,6 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;

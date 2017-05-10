@@ -1,4 +1,4 @@
-# Ember-cli-dropzonejs
+# ![](http://i67.tinypic.com/2hq6zcx.png)
 [![Build Status](https://travis-ci.org/FutoRicky/ember-cli-dropzonejs.svg?branch=test%2Ftarvis-ci-implementation)](https://travis-ci.org/FutoRicky/ember-cli-dropzonejs)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-dropzonejs.svg)](https://emberobserver.com/addons/ember-cli-dropzonejs)
 
@@ -8,7 +8,7 @@ Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dr
 
 Versions
 -------------
-Current version is running ember-cli >= `2.8.0`
+Current version is running ember-cli >= `2.13.1`
 
 Versions 0.8.6 <= are running ember-cli `1.13.8`
 
@@ -17,10 +17,10 @@ Installation
 -------------
 `ember install ember-cli-dropzonejs`
 
-This addon will use dropzone's default css by default. If you prefer to use your own css, add this option to your `Brocfile.js`:
+This addon will use dropzone's default css by default. If you prefer to use your own css, add this option to your `ember-cli-build.js`:
 
 ```javascript
-var app = new EmberApp({
+var app = new EmberApp(defaults, {
   ---
   emberCliDropzonejs: {
     includeDropzoneCss: false
@@ -60,7 +60,7 @@ To use events, set your event handler in your controller like so:
 
 and set it in your component declaration:
 
-`{{drop-zone url='http://example.com/example' addfile=addedFileEvent}}`
+`{{drop-zone url='http://example.com/example' addedfile=addedFileEvent}}`
 
 **Remember to add an url, this addon will not work without it**
 
