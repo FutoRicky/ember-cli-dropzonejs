@@ -1,22 +1,35 @@
 /* jshint node: true */
 'use strict';
 
+var path = require('path');
+var Funnel = require('broccoli-funnel');
+var MergeTrees = require('broccoli-merge-trees');
+
 module.exports = {
   name: 'ember-cli-dropzonejs',
-  included: function(app) {
+  included() {
     this._super.included.apply(this, arguments);
-
-    var host = this._findHost();
-
-    var options = host.options && host.options.emberCliDropzonejs || { includeDropzoneCss: true };
-
     if (!process.env.EMBER_CLI_FASTBOOT) {
-      // This will only be included in the browser build
-      this.import(host.bowerDirectory + '/dropzone/dist/dropzone.js');
+      this.import('vendor/dropzone.min.js');
+      this.import('vendor/dropzone.min.css');
     }
+  },
+  treeForVendor(vendorTree) {
+    if (!process.env.EMBER_CLI_FASTBOOT) {
+      let trees = [];
+      let dropzoneTree = new Funnel(
+        path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
+        {
+          files: ['dropzone.min.js', 'dropzone.min.css']
+        }
+      );
 
-    if (options.includeDropzoneCss){
-      this.import(host.bowerDirectory + '/dropzone/dist/dropzone.css');
+      trees.push(dropzoneTree);
+
+      if (vendorTree) {
+        trees.push(vendorTree);
+      }
+      return new MergeTrees(trees);
     }
   }
 };
