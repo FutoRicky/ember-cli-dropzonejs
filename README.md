@@ -8,7 +8,7 @@ Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dr
 
 Versions
 -------------
-Current version is running ember-cli >= `2.8.0`
+Current version is running ember-cli >= `2.13.1`
 
 Versions 0.8.6 <= are running ember-cli `1.13.8`
 
@@ -44,7 +44,7 @@ example:
 
 If you would like to use the whole document body as a drop location you can set `maxDropRegion` to true
 
-####Event Handling
+#### Event Handling
 [Dropzonejs Events Docs](http://www.dropzonejs.com/#events)
 
 

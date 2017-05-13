@@ -25,6 +25,7 @@ export default Ember.Component.extend({
   thumbnailHeight: null,
   thumbnailWidth: null,
 
+  // Events
   // All of these receive the event as first parameter:
   drop: null,
   dragstart: null,
