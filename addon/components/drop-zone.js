@@ -153,7 +153,7 @@ export default Ember.Component.extend({
       maxFiles: this.maxFiles,
       createImageThumbnails: this.createImageThumbnails,
       params: this.params,
-      
+
       // resize: not available
       acceptedFiles: this.acceptedFiles,
       autoProcessQueue: this.autoProcessQueue,
@@ -174,7 +174,7 @@ export default Ember.Component.extend({
 
       // Fix flickering dragging over child elements: https://github.com/enyo/dropzone/issues/438
       init: function() {
-        this.dragEnteredEls = new Array();
+        this.dragEnteredEls = [];
       },
       dragenter: function(e) {
         this.dragEnteredEls.push(e.target);
