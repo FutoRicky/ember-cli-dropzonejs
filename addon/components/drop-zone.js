@@ -133,30 +133,6 @@ export default Ember.Component.extend({
   },
 
   getDropzoneOptions() {
-    const onDragEnterLeaveHandler = function(dropzoneInstance) {
-      const onDrag = ( element => {
-        let dragCounter = 0;
-
-        return {
-          enter(event) {
-            event.preventDefault();
-            dragCounter++;
-            element.classList.add('dz-drag-hover');
-          },
-          leave() {
-            dragCounter--;
-
-            if (dragCounter === 0) {
-              element.classList.remove('dz-drag-hover');
-            }
-          }
-        };
-      }).call(this, dropzoneInstance.element);
-
-      dropzoneInstance.on('dragenter', onDrag.enter);
-      dropzoneInstance.on('dragleave', onDrag.leave);
-    };
-
     let dropzoneOptions = {};
     let dropzoneConfig = {
       url: this.url,
@@ -197,9 +173,19 @@ export default Ember.Component.extend({
       dictMaxFilesExceeded: this.dictMaxFilesExceeded,
 
       // Fix flickering dragging over child elements: https://github.com/enyo/dropzone/issues/438
-      dragenter: Ember.$.noop,
-      dragleave: Ember.$.noop,
-      init: function () { onDragEnterLeaveHandler(this); }
+      init: function() {
+        this.dragEnteredEls = new Array();
+      },
+      dragenter: function(e) {
+        this.dragEnteredEls.push(e.target);
+        Ember.$(this.element).addClass('dz-drag-hover');
+      },
+      dragleave: function(e) {
+        this.dragEnteredEls = Ember.$(this.dragEnteredEls).not(e.target);
+        if (this.dragEnteredEls.length === 0) {
+          Ember.$(this.element).removeClass('dz-drag-hover');
+        }
+      },
     };
 
     for (let option in dropzoneConfig) {
