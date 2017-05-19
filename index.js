@@ -1,35 +1,42 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
 var path = require('path');
-var Funnel = require('broccoli-funnel');
 var MergeTrees = require('broccoli-merge-trees');
+var Funnel = require('broccoli-funnel');
+var map = require('broccoli-stew').map;
 
 module.exports = {
   name: 'ember-cli-dropzonejs',
-  included() {
-    this._super.included.apply(this, arguments);
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      this.import('vendor/dropzone.min.js');
-      this.import('vendor/dropzone.min.css');
-    }
-  },
+
   treeForVendor(vendorTree) {
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      let trees = [];
-      let dropzoneTree = new Funnel(
-        path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
-        {
-          files: ['dropzone.min.js', 'dropzone.min.css']
-        }
-      );
+    var dropzoneJs = new Funnel(
+      path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
+      { files: ['dropzone.min.js'] }
+    );
 
-      trees.push(dropzoneTree);
+    dropzoneJs = map(
+      dropzoneJs,
+      content => `if (typeof FastBoot === 'undefined') { ${content} }`
+    );
 
-      if (vendorTree) {
-        trees.push(vendorTree);
+    return vendorTree ? new MergeTrees([vendorTree, dropzoneJs]) : dropzoneJs;
+  },
+
+  treeForStyles(styleTree) {
+    var dropzoneCss = new Funnel(
+      path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
+      {
+        files: ['dropzone.min.css'],
+        destDir: 'app/styles'
       }
-      return new MergeTrees(trees);
-    }
+    );
+
+    return styleTree ? new MergeTrees([styleTree, dropzoneCss]) : dropzoneCss;
+  },
+
+  included() {
+    this.import('vendor/dropzone.min.js');
+    this.import('app/styles/dropzone.min.css');
   }
 };
