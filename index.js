@@ -20,7 +20,7 @@ module.exports = {
       content => `if (typeof FastBoot === 'undefined') { ${content} }`
     );
 
-    return new MergeTrees(vendorTree, dropzoneJs);
+    return vendorTree ? new MergeTrees([vendorTree, dropzoneJs]) : dropzoneJs;
   },
 
   treeForStyles(styleTree) {
@@ -32,7 +32,7 @@ module.exports = {
       }
     );
 
-    return new MergeTrees(styleTree, dropzoneCss);
+    return styleTree ? new MergeTrees([styleTree, dropzoneCss]) : dropzoneCss;
   },
 
   included() {
