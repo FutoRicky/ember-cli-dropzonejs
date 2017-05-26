@@ -4,6 +4,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['dropzone'],
 
+  url: '#',
   myDropzone: document.body || undefined,
 
   dropzoneOptions: null,
@@ -30,9 +31,11 @@ export default Ember.Component.extend({
   drop: null,
   dragstart: null,
   dragend: null,
+  dragleave: null,
+
+  //noops
   dragenter() {},
   dragover() {},
-  dragleave: null,
 
   // All of these receive the file as first parameter:
   addedfile: null,
@@ -125,6 +128,8 @@ export default Ember.Component.extend({
         output[e] = this.get(e)
       }
     });
+
+    Ember.assert('Url is required for dropzone', output.url);
 
     return output;
   }),
