@@ -108,7 +108,7 @@ export default Ember.Component.extend({
     let config = this.get('dzConfigHash'),
         optList = this.get('dzOptionsList'),
         output = {};
-  
+
     optList.forEach((e) => {
       // use dynamic hash first
       if (config[e]) {
