@@ -4,7 +4,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['dropzone'],
 
-  url: '#',
   myDropzone: document.body || undefined,
 
   dropzoneOptions: null,
@@ -130,7 +129,7 @@ export default Ember.Component.extend({
     });
 
     Ember.assert('Url is required for dropzone', output.url);
-
+    output.url = '#';
     return output;
   }),
 
