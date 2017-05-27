@@ -23,6 +23,7 @@ test('it renders', function(assert) {
 
   // Creates the component instance
   let component = this.subject();
+  component.set('url', '#');
   assert.equal(component._state, 'preRender');
 
   // Renders the component to the page
@@ -32,6 +33,7 @@ test('it renders', function(assert) {
 
 test('that is being initialized', function(assert) {
   let component = this.subject();
+  component.set('url', '#');
   this.render();
   Ember.run(() => {
     assert.ok(component.myDropzone);
@@ -45,7 +47,7 @@ test('that options are being assigned properly', function(assert) {
   // previewsContainer
   // acceptedFiles
   // forceFallback
-
+  //
   let urlArr = ['#', 'http://example.com/example', '/here/inside'];
   component.set('url', urlArr[Math.floor(Math.random() * urlArr.length)]);
 
@@ -107,7 +109,7 @@ test('that options are being assigned properly', function(assert) {
 
 test('that translations are being set', function(assert) {
   let component = this.subject();
-
+  component.set('url', '#');
   component.set('dictDefaultMessage', stringGenerator(Math.floor(Math.random() * 100)));
   component.set('dictFallbackMessage', stringGenerator(Math.floor(Math.random() * 100)));
   component.set('dictFallbackText', stringGenerator(Math.floor(Math.random() * 100)));
