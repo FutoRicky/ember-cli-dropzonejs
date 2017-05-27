@@ -7,7 +7,6 @@ export default Ember.Component.extend({
   myDropzone: document.body || undefined,
 
   dropzoneOptions: null,
-
   // Configuration Options
   dzOptionsList: [
     'url', 'withCredentials', 'method', 'parallelUploads', 'maxFilesize', 'filesizeBase',
@@ -113,7 +112,7 @@ export default Ember.Component.extend({
 
     optList.forEach((e) => {
       // use dynamic hash first
-      if (config[e]) {
+      if (config.hasOwnProperty(e)) {
         output[e] = config[e];
       }
 
@@ -129,7 +128,10 @@ export default Ember.Component.extend({
     });
 
     Ember.assert('Url is required for dropzone', output.url);
-    output.url = '#';
+    // Preserve defaults for existing apps/tests
+    if (!output.url) {
+      output.url = '#';
+    }
     return output;
   }),
 

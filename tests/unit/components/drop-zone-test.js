@@ -51,6 +51,7 @@ test('that options are being assigned properly', function(assert) {
   let urlArr = ['#', 'http://example.com/example', '/here/inside'];
   component.set('url', urlArr[Math.floor(Math.random() * urlArr.length)]);
 
+
   let methodArr = ['POST', 'GET'];
   component.set('method', methodArr[Math.floor(Math.random() * methodArr.length)]);
 
@@ -137,4 +138,24 @@ test('that translations are being set', function(assert) {
     assert.equal(component.dictMaxFilesExceeded, dropTranslations.dictMaxFilesExceeded);
 
   });
+});
+
+test('that options hash works with set properties', function (assert) {
+  let component = this.subject();
+  let optionsHash = {
+    url: 'fakeURL',
+    method: 'GET',
+    maxFiles: 4
+  };
+
+  component.set('dzConfigHash', optionsHash);
+  this.render();
+  Ember.run(() => {
+    let dropOption = component.myDropzone.options;
+
+    assert.equal(optionsHash.url, dropOption.url);
+    assert.equal(optionsHash.method, dropOption.method);
+    assert.equal(optionsHash.maxFiles, dropOption.maxFiles);
+  })
+
 });
