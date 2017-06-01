@@ -4,7 +4,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['dropzone'],
 
-  myDropzone: document.body || undefined,
+  myDropzone: (typeof FastBoot === 'undefined') ? document.body : undefined,
   
   dropzoneOptions: null,
 
@@ -211,7 +211,7 @@ export default Ember.Component.extend({
   },
 
   createDropzone(element) {
-    let region = this.get('maxDropRegion') ? document.body : element;
+    let region = (this.get('maxDropRegion') && (typeof FastBoot === 'undefined')) ? document.body : element;
     this.set('myDropzone', new Dropzone(region, this.dropzoneOptions));
   },
 
