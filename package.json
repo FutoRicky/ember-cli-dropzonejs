@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-dropzonejs",
-  "version": "1.0.2",
+  "version": "10.0.0",
   "description": "Drag and drop file uploader addon using dropzonejs",
   "directories": {
     "doc": "doc",
