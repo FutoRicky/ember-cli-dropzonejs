@@ -117,7 +117,7 @@ export default Ember.Component.extend({
       }
 
       // if property is set specifically, override
-      if (this.get(e)) {
+      if (this.get(e) != null) {
         output[e] = this.get(e);
       }
 

@@ -72,7 +72,9 @@ test('that options are being assigned properly', function(assert) {
 
   component.set('addRemoveLinks', Boolean(Math.floor(Math.random() * 2)));
 
-  component.set('clickable', Boolean(Math.floor(Math.random() * 2)));
+  let bool = Boolean(Math.floor(Math.random() * 2));
+  component.set('clickable', bool);
+
 
   component.set('maxThumbnailFilesize', Math.floor(Math.random() * 10000));
 
@@ -89,20 +91,20 @@ test('that options are being assigned properly', function(assert) {
 
   Ember.run(() => {
     let dropOption = component.myDropzone.options;
-    assert.equal(component.url, dropOption.url);
-    assert.equal(component.method, dropOption.method);
-    assert.equal(component.parallelUploads, dropOption.parallelUploads);
-    assert.equal(component.maxFilesize, dropOption.maxFilesize);
-    assert.equal(component.filesizeBase, dropOption.filesizeBase);
-    assert.equal(component.paramNameArr, dropOption.paramNameArr);
-    assert.equal(component.uploadMultiple, dropOption.uploadMultiple);
-    assert.equal(component.headers, dropOption.headers);
-    assert.equal(component.addRemoveLinks, dropOption.addRemoveLinks);
-    assert.equal(component.clickable, dropOption.clickable);
-    assert.equal(component.maxThumbnailFilesize, dropOption.maxThumbnailFilesize);
-    assert.equal(component.thumbnailWidth, dropOption.thumbnailWidth);
-    assert.equal(component.thumbnailHeight, dropOption.thumbnailHeight);
-    assert.equal(component.maxFiles, dropOption.maxFiles);
+    assert.equal(component.url, dropOption.url, 'URL');
+    assert.equal(component.method, dropOption.method, 'Method');
+    assert.equal(component.parallelUploads, dropOption.parallelUploads, 'parallelUploads');
+    assert.equal(component.maxFilesize, dropOption.maxFilesize, 'max filesize');
+    assert.equal(component.filesizeBase, dropOption.filesizeBase, 'filesizeBase');
+    assert.equal(component.paramNameArr, dropOption.paramNameArr, 'paramNameArr');
+    assert.equal(component.uploadMultiple, dropOption.uploadMultiple, 'uploadMultiple');
+    assert.equal(component.headers, dropOption.headers, 'headers');
+    assert.equal(component.addRemoveLinks, dropOption.addRemoveLinks, 'addRemoveLinks');
+    assert.equal(component.get('clickable'), dropOption.clickable, 'clickable');
+    assert.equal(component.maxThumbnailFilesize, dropOption.maxThumbnailFilesize, 'maxThumbnailFilesize');
+    assert.equal(component.thumbnailWidth, dropOption.thumbnailWidth, 'thumbnailWidth');
+    assert.equal(component.thumbnailHeight, dropOption.thumbnailHeight, 'thumbnailHeight');
+    assert.equal(component.maxFiles, dropOption.maxFiles, 'maxFiles');
 
   });
 
@@ -145,7 +147,11 @@ test('that options hash works with set properties', function (assert) {
   let optionsHash = {
     url: 'fakeURL',
     method: 'GET',
-    maxFiles: 4
+    maxFiles: 4,
+    params: {
+      thingOne: 1,
+      thingTwo: 2
+    }
   };
 
   component.set('dzConfigHash', optionsHash);
@@ -153,9 +159,10 @@ test('that options hash works with set properties', function (assert) {
   Ember.run(() => {
     let dropOption = component.myDropzone.options;
 
-    assert.equal(optionsHash.url, dropOption.url);
-    assert.equal(optionsHash.method, dropOption.method);
-    assert.equal(optionsHash.maxFiles, dropOption.maxFiles);
+    assert.equal(optionsHash.url, dropOption.url, 'url');
+    assert.equal(optionsHash.method, dropOption.method, 'method');
+    assert.equal(optionsHash.maxFiles, dropOption.maxFiles, 'maxFiles');
+    assert.equal(optionsHash.params, dropOption.params, 'params')
   })
 
 });
