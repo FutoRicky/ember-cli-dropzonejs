@@ -4,10 +4,24 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['dropzone'],
 
+  /**
+   * Dropzone dom element
+   * @private
+   * @type {[type]}
+   */
   myDropzone: document.body || undefined,
 
+  /**
+   * internal configurtion for Dropzone method
+   * @private
+   * @type {[type]}
+   */
   dropzoneOptions: null,
-  // Configuration Options
+
+  /**
+   * list of available properties
+   * @type {Array}
+   */
   dzOptionsList: [
     'url', 'withCredentials', 'method', 'parallelUploads', 'maxFilesize', 'filesizeBase',
     'paramName', 'uploadMultiple', 'headers', 'addRemoveLinks', 'previewsContainer',
@@ -18,7 +32,12 @@ export default Ember.Component.extend({
     'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesExceeded', 'maxDropRegion'
   ],
 
-  dzConfigHash: {},
+  /**
+   * Configuration Hash to set dynamic properties
+   * @public
+   * @type {Object}
+   */
+  config: {},
 
   // Need to preserve null default values
   thumbnailHeight: null,
@@ -65,6 +84,10 @@ export default Ember.Component.extend({
   // Callback functions
   accept: null,
 
+  /**
+   * @private
+   * event management
+   */
   setEvents() {
     let myDropzone = this.get('myDropzone');
     let events = {
@@ -104,9 +127,13 @@ export default Ember.Component.extend({
       }
     }
   },
-
-  config: Ember.computed(function(){
-    let config = this.get('dzConfigHash'),
+  /**
+   * internal config cp
+   * @private
+   * @return {[type]} [description]
+   */
+  _dzConfig: Ember.computed(function(){
+    let config = this.get('confi'),
         optList = this.get('dzOptionsList'),
         output = {};
 
@@ -160,7 +187,7 @@ export default Ember.Component.extend({
       dropzoneInstance.on('dragleave', onDrag.leave);
     };
 
-    let config = this.get('config');
+    let config = this.get('_dzConfig');
     config.init = function () { onDragEnterLeaveHandler(this); }
 
     this.set('dropzoneOptions', config);
