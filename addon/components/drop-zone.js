@@ -133,7 +133,7 @@ export default Ember.Component.extend({
    * @return {[type]} [description]
    */
   _dzConfig: Ember.computed(function(){
-    let config = this.get('confi'),
+    let config = this.get('config'),
         optList = this.get('dzOptionsList'),
         output = {};
 
