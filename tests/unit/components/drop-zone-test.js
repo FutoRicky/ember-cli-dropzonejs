@@ -154,7 +154,7 @@ test('that options hash works with set properties', function (assert) {
     }
   };
 
-  component.set('dzConfigHash', optionsHash);
+  component.set('config', optionsHash);
   this.render();
   Ember.run(() => {
     let dropOption = component.myDropzone.options;
