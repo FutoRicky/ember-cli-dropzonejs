@@ -9,7 +9,7 @@ export default Ember.Component.extend({
    * @private
    * @type {[type]}
    */
-  myDropzone: document.body || undefined,
+  myDropzone: (typeof FastBoot === 'undefined') ? document.body : undefined,
 
   /**
    * internal configurtion for Dropzone method
@@ -150,7 +150,7 @@ export default Ember.Component.extend({
 
       // need to set null versions of thumbnail width / height
       if (e === 'thumbnailHeight' || e === 'thumbnailWidth') {
-        output[e] = this.get(e)
+        output[e] = this.get(e);
       }
     });
 
@@ -188,13 +188,15 @@ export default Ember.Component.extend({
     };
 
     let config = this.get('_dzConfig');
-    config.init = function () { onDragEnterLeaveHandler(this); }
+    config.init = function () {
+      onDragEnterLeaveHandler(this);
+    };
 
     this.set('dropzoneOptions', config);
   },
 
   createDropzone(element) {
-    let region = this.get('maxDropRegion') ? document.body : element;
+    let region = (this.get('maxDropRegion') && (typeof FastBoot === 'undefined')) ? document.body : element;
     this.set('myDropzone', new Dropzone(region, this.dropzoneOptions));
   },
 
