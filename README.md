@@ -42,6 +42,37 @@ example:
 
 `{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
 
+You can also use dynamic options:
+
+```
+// controller.js
+
+import Ember from 'ember';
+
+export default Ember.Controller.extend({
+  addedfile: Ember.computed(function() {
+    return function() {
+      Ember.Logger.debug('addedFile happened');
+    };
+  }),
+  options: Ember.computed(function() {
+    return {
+      url: '#',
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      addedfile: this.addedfile
+    };
+  })
+});
+
+```
+
+```
+// template.js
+
+{{drop-zone config=options}}
+```
+
 If you would like to use the whole document body as a drop location you can set `maxDropRegion` to true
 
 #### Event Handling
