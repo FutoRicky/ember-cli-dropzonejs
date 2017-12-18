@@ -37,7 +37,13 @@ module.exports = {
   },
 
   included() {
+
+    let options = this.options.emberCliDropzonejs || { includeDropzoneCss: true };
+
     this.import('vendor/dropzone.min.js');
-    this.import('app/styles/dropzone.min.css');
+
+    if (options.includeDropzoneCss){
+      this.import('app/styles/dropzone.min.css');
+    }
   }
 };
