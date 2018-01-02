@@ -36,9 +36,9 @@ module.exports = {
     return styleTree ? new MergeTrees([styleTree, dropzoneCss]) : dropzoneCss;
   },
 
-  included() {
+  included(app) {
 
-    let options = this.options.emberCliDropzonejs || { includeDropzoneCss: true };
+    let options = app.options.emberCliDropzonejs || { includeDropzoneCss: true };
 
     this.import('vendor/dropzone.min.js');
 
