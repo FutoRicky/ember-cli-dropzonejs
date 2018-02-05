@@ -172,6 +172,7 @@ export default Ember.Component.extend({
       thumbnailHeight: this.thumbnailHeight,
       maxFiles: this.maxFiles,
       createImageThumbnails: this.createImageThumbnails,
+      renameFile: this.renameFile,
 
       // resize: not available
       acceptedFiles: this.acceptedFiles,
