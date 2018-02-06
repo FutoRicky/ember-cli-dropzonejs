@@ -119,6 +119,7 @@ export default Ember.Component.extend({
       queuecomplete: this.queuecomplete,
       files: this.files,
       accept: this.accept,
+      renameFile: this.renameFile,
     };
 
     for (let e in events) {
