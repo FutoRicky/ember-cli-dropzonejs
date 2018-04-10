@@ -1,5 +1,6 @@
 # ![](http://i67.tinypic.com/2hq6zcx.png)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-cli-dropzonejs.svg)](https://emberobserver.com/addons/ember-cli-dropzonejs)
+[ ![Codeship Status for FutoRicky/ember-cli-dropzonejs](https://app.codeship.com/projects/81fd6b80-1a72-0136-d790-5ac25dfa0b5f/status?branch=master)](https://app.codeship.com/projects/284304)
 
 Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dropzonejs.com/).
 
