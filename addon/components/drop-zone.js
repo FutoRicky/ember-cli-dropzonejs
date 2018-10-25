@@ -1,7 +1,10 @@
 /* global Dropzone*/
-import Ember from 'ember';
 
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { assert } from '@ember/debug';
+
+export default Component.extend({
   classNames: ['dropzone'],
 
   /**
@@ -9,7 +12,9 @@ export default Ember.Component.extend({
    * @private
    * @type {[type]}
    */
-  myDropzone: (typeof FastBoot === 'undefined') ? document.body : undefined,
+  myDropzone: computed( function() {
+    return (typeof FastBoot === 'undefined') ? document.body : undefined;
+  }),
 
   /**
    * internal configurtion for Dropzone method
@@ -22,22 +27,26 @@ export default Ember.Component.extend({
    * list of available properties
    * @type {Array}
    */
-  dzOptionsList: [
-    'url', 'withCredentials', 'method', 'parallelUploads', 'maxFilesize', 'filesizeBase',
-    'paramName', 'uploadMultiple', 'headers', 'addRemoveLinks', 'previewsContainer',
-    'clickable', 'maxThumbnailFilesize', 'thumbnailWidth', 'thumbnailHeight', 'maxFiles',
-    'createImageThumbnails', 'params', 'acceptedFiles', 'autoProcessQueue', 'forceFallback',
-    'previewTemplate', 'dictDefaultMessage', 'dictFallbackMessage', 'dictInvalidFileType',
-    'dictFallbackText', 'dictFileTooBig', 'dictResponseError', 'dictCancelUpload',
-    'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesExceeded', 'maxDropRegion'
-  ],
+  dzOptionsList: computed(function() {
+    return [
+      'url', 'withCredentials', 'method', 'parallelUploads', 'maxFilesize', 'filesizeBase',
+      'paramName', 'uploadMultiple', 'headers', 'addRemoveLinks', 'previewsContainer',
+      'clickable', 'maxThumbnailFilesize', 'thumbnailWidth', 'thumbnailHeight', 'maxFiles',
+      'createImageThumbnails', 'params', 'acceptedFiles', 'autoProcessQueue', 'forceFallback',
+      'previewTemplate', 'dictDefaultMessage', 'dictFallbackMessage', 'dictInvalidFileType',
+      'dictFallbackText', 'dictFileTooBig', 'dictResponseError', 'dictCancelUpload',
+      'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesExceeded', 'maxDropRegion'
+    ];
+  }),
 
   /**
    * Configuration Hash to set dynamic properties
    * @public
    * @type {Object}
    */
-  config: {},
+  config: computed(function() {
+    return {};
+  }),
 
   // Need to preserve null default values
   thumbnailHeight: null,
@@ -133,7 +142,7 @@ export default Ember.Component.extend({
    * @private
    * @return {[type]} [description]
    */
-  _dzConfig: Ember.computed(function(){
+  _dzConfig: computed(function(){
     let config = this.get('config'),
         optList = this.get('dzOptionsList'),
         output = {};
@@ -155,7 +164,7 @@ export default Ember.Component.extend({
       }
     });
 
-    Ember.assert('Url is required for dropzone', output.url);
+    assert('Url is required for dropzone', output.url);
     // Preserve defaults for existing apps/tests
     if (!output.url) {
       output.url = '#';
@@ -201,11 +210,11 @@ export default Ember.Component.extend({
     this.set('myDropzone', new Dropzone(region, this.dropzoneOptions));
   },
 
-  destroyDropzone: Ember.on('willDestroyElement', function() {
+  willDestroyElement() {
     this.get('myDropzone').destroy();
-  }),
+  },
 
-  insertDropzone: Ember.on('didInsertElement', function() {
+  didInsertElement() {
     let _this = this;
     this.getDropzoneOptions();
     Dropzone.autoDiscover = false;
@@ -244,5 +253,5 @@ export default Ember.Component.extend({
     }
 
     return this.myDropzone;
-  }),
+  },
 });

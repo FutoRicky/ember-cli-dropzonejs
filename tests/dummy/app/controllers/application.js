@@ -1,7 +1,9 @@
 import Ember from 'ember';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 
-export default Ember.Controller.extend({
-  addedfile: Ember.computed(function() {
+export default Controller.extend({
+  addedfile: computed(function() {
     Ember.Logger.debug('addedFile happened');
   })
 });
