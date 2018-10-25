@@ -42,11 +42,13 @@ To set properties simply add the name of the property inside the component call 
 
 example:
 
-`{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}`
+```handlebars
+{{drop-zone url='http://example.com/example' clickable=false addRemoveLinks=true}}
+```
 
 You can also use dynamic options:
 
-```
+```javascript
 // controller.js
 
 import Ember from 'ember';
@@ -71,7 +73,7 @@ export default Controller.extend({
 
 ```
 
-```
+```handlebars
 // template.js
 
 {{drop-zone config=options}}
@@ -85,7 +87,7 @@ If you would like to use the whole document body as a drop location you can set 
 
 To use events, set your event handler in your controller like so:
 
-```
+```javascript
   addedFileEvent: computed(function() {
     return function() {
       // do something...
@@ -95,7 +97,9 @@ To use events, set your event handler in your controller like so:
 
 and set it in your component declaration:
 
-`{{drop-zone url="http://example.com/example" addedfile=addedFileEvent}}`
+```handlebars
+{{drop-zone url="http://example.com/example" addedfile=addedFileEvent}}
+```
 
 **Remember to add an url, this addon will not work without it**
 
