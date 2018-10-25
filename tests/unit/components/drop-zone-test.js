@@ -1,5 +1,5 @@
-import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
+import { run } from '@ember/runloop';
 
 moduleForComponent('drop-zone', 'Unit | Component | drop zone', {
   // Specify the other units that are required for this test
@@ -35,7 +35,7 @@ test('that is being initialized', function(assert) {
   let component = this.subject();
   component.set('url', '#');
   this.render();
-  Ember.run(() => {
+  run(() => {
     assert.ok(component.myDropzone);
   });
 });
@@ -89,7 +89,7 @@ test('that options are being assigned properly', function(assert) {
 
   this.render();
 
-  Ember.run(() => {
+  run(() => {
     let dropOption = component.myDropzone.options;
     assert.equal(component.url, dropOption.url, 'URL');
     assert.equal(component.method, dropOption.method, 'Method');
@@ -126,7 +126,7 @@ test('that translations are being set', function(assert) {
 
   this.render();
 
-  Ember.run(() => {
+  run(() => {
     let dropTranslations = component.myDropzone.options;
     assert.equal(component.dictDefaultMessage, dropTranslations.dictDefaultMessage);
     assert.equal(component.dictFallbackMessage, dropTranslations.dictFallbackMessage);
@@ -156,7 +156,7 @@ test('that options hash works with set properties', function (assert) {
 
   component.set('config', optionsHash);
   this.render();
-  Ember.run(() => {
+  run(() => {
     let dropOption = component.myDropzone.options;
 
     assert.equal(optionsHash.url, dropOption.url, 'url');

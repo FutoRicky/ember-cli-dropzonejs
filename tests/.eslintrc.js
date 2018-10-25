@@ -1,5 +1,5 @@
-module.exports = {
-  env: {
-    embertest: true
-  }
-};
+// module.exports = {
+//   env: {
+//     embertest: true
+//   }
+// };
