@@ -51,6 +51,7 @@ test('that options are being assigned properly', function(assert) {
   let urlArr = ['#', 'http://example.com/example', '/here/inside'];
   component.set('url', urlArr[Math.floor(Math.random() * urlArr.length)]);
 
+  component.set('timeout', 50000);
 
   let methodArr = ['POST', 'GET'];
   component.set('method', methodArr[Math.floor(Math.random() * methodArr.length)]);
@@ -93,6 +94,7 @@ test('that options are being assigned properly', function(assert) {
     let dropOption = component.myDropzone.options;
     assert.equal(component.url, dropOption.url, 'URL');
     assert.equal(component.method, dropOption.method, 'Method');
+    assert.equal(component.timeout, dropOption.timeout, 'timeout');
     assert.equal(component.parallelUploads, dropOption.parallelUploads, 'parallelUploads');
     assert.equal(component.maxFilesize, dropOption.maxFilesize, 'max filesize');
     assert.equal(component.filesizeBase, dropOption.filesizeBase, 'filesizeBase');
