@@ -51,12 +51,11 @@ You can also use dynamic options:
 ```javascript
 // controller.js
 
-import Ember from 'ember';
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 
 export default Controller.extend({
-  addedfile: Ember.computed(function() {
+  addedfile: computed(function() {
     return function() {
       Ember.Logger.debug('addedFile happened');
     };
