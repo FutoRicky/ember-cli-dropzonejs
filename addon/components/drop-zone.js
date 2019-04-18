@@ -35,7 +35,8 @@ export default Component.extend({
       'createImageThumbnails', 'params', 'acceptedFiles', 'autoProcessQueue', 'forceFallback',
       'previewTemplate', 'dictDefaultMessage', 'dictFallbackMessage', 'dictInvalidFileType',
       'dictFallbackText', 'dictFileTooBig', 'dictResponseError', 'dictCancelUpload', 'timeout',
-      'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesExceeded', 'maxDropRegion'
+      'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesExceeded', 'maxDropRegion',
+      'dictUploadCanceled', 'dictRemoveFileConfirmation', 'dictFileSizeUnits'
     ];
   }),
 
