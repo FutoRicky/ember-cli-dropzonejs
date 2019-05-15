@@ -176,18 +176,19 @@ export default Component.extend({
   getDropzoneOptions() {
     const onDragEnterLeaveHandler = function(dropzoneInstance) {
       const onDrag = ( element => {
-        let dragCounter = 0;
+        let dragEnteredEls = [];
 
         return {
           enter(event) {
-            event.preventDefault();
-            dragCounter++;
+            dragEnteredEls.push(event.target);
             element.classList.add('dz-drag-hover');
           },
-          leave() {
-            dragCounter--;
+          leave(event) {
+            dragEnteredEls = dragEnteredEls.filter(el => {
+              return el !== event.target;
+            });
 
-            if (dragCounter === 0) {
+            if (dragEnteredEls.length === 0) {
               element.classList.remove('dz-drag-hover');
             }
           }
@@ -199,6 +200,11 @@ export default Component.extend({
     };
 
     let config = this.get('_dzConfig');
+
+    // these events will be overwritten
+    config.dragenter = function() {}
+    config.dragleave = function() {}
+
     config.init = function () {
       onDragEnterLeaveHandler(this);
     };
