@@ -12,7 +12,7 @@ module.exports = {
 
   treeForVendor(vendorTree) {
     var dropzoneJs = new Funnel(
-      path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
+      path.join(path.dirname(require.resolve('dropzone')), 'min'),
       { files: ['dropzone.min.js'] }
     );
 
@@ -26,7 +26,7 @@ module.exports = {
 
   treeForStyles(styleTree) {
     var dropzoneCss = new Funnel(
-      path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
+      path.join(path.dirname(require.resolve('dropzone')), 'min'),
       {
         files: ['dropzone.min.css'],
         destDir: 'app/styles'
