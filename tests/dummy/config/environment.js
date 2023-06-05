@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'dummy',
     environment,
@@ -13,8 +13,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
     contentSecurityPolicy: {
       'default-src': "'none' *",
@@ -28,13 +28,13 @@ module.exports = function(environment) {
       'connect-src': "'self' *",
       'img-src': "'self' *",
       'style-src': "'self' 'unsafe-inline' *",
-      'media-src': "'self' *"
+      'media-src': "'self' *",
     },
 
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
   };
 
   if (environment === 'development') {
