@@ -36,7 +36,7 @@
   "dependencies": {
     "broccoli-funnel": "^3.0.8",
     "broccoli-merge-trees": "^4.2.0",
-    "dropzone": "5.5.1",
+    "dropzone": "^5.9.3",
     "ember-auto-import": "^2.6.3",
     "ember-cli-babel": "7.26.11",
     "ember-cli-htmlbars": "^6.2.0"
@@ -83,7 +83,8 @@
     "webpack": "5.88.2"
   },
   "peerDependencies": {
-    "ember-source": "^4.0.0"
+    "ember-source": "^4.0.0",
+    "dropzone": "^5.9.3"
   },
   "engines": {
     "node": "14.* || 16.* || >= 18"

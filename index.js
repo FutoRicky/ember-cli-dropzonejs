@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unpublished-require */
 /* eslint-env node */
 /* jshint node: true */
 'use strict';
@@ -6,10 +5,11 @@
 var path = require('path');
 var MergeTrees = require('broccoli-merge-trees');
 var Funnel = require('broccoli-funnel');
+// eslint-disable-next-line n/no-unpublished-require
 var map = require('broccoli-stew').map;
 
 module.exports = {
-  name: '@volldigital/ember-cli-dropzonejs',
+  name: require('./package').name,
 
   treeForVendor(vendorTree) {
     var dropzoneJs = new Funnel(
