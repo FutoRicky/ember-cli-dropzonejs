@@ -15,12 +15,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/volldigital/ember-cli-dropzonejs.git"
+    "url": "git+https://github.com/volldigital/ember-cli-dropzonejs.git"
   },
   "license": "MIT",
   "author": "VOLL digital <technik@voll.digital>",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
@@ -90,5 +89,10 @@
   },
   "ember": {
     "edition": "octane"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/volldigital/ember-cli-dropzonejs/issues"
+  },
+  "homepage": "https://github.com/volldigital/ember-cli-dropzonejs#readme",
+  "main": "index.js"
 }
