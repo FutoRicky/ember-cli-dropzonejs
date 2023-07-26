@@ -10,7 +10,6 @@ module.exports = {
     babelOptions: {
       plugins: [
         ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
-        ['@babel/plugin-proposal-class-properties', { loose: true }],
       ],
     },
   },
@@ -28,6 +27,7 @@ module.exports = {
       files: [
         './.eslintrc.js',
         './.prettierrc.js',
+        './.stylelintrc.js',
         './.template-lintrc.js',
         './ember-cli-build.js',
         './index.js',
@@ -49,8 +49,7 @@ module.exports = {
         browser: false,
         node: true,
       },
-      plugins: ['node'],
-      extends: ['plugin:node/recommended'],
+      extends: ['plugin:n/recommended'],
     },
     {
       // Test files:
