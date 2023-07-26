@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unpublished-require */
 /* eslint-env node */
 /* jshint node: true */
 'use strict';
@@ -18,7 +19,7 @@ module.exports = {
 
     dropzoneJs = map(
       dropzoneJs,
-      content => `if (typeof FastBoot === 'undefined') { ${content} }`
+      (content) => `if (typeof FastBoot === 'undefined') { ${content} }`
     );
 
     return vendorTree ? new MergeTrees([vendorTree, dropzoneJs]) : dropzoneJs;
@@ -29,7 +30,7 @@ module.exports = {
       path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
       {
         files: ['dropzone.min.css'],
-        destDir: 'app/styles'
+        destDir: 'app/styles',
       }
     );
 
@@ -37,13 +38,15 @@ module.exports = {
   },
 
   included(app) {
-
-    let options = app.options.emberCliDropzonejs || { includeDropzoneCss: true };
+    this._super.included.apply(this, arguments);
+    let options = app.options.emberCliDropzonejs || {
+      includeDropzoneCss: true,
+    };
 
     this.import('vendor/dropzone.min.js');
 
-    if (options.includeDropzoneCss){
+    if (options.includeDropzoneCss) {
       this.import('app/styles/dropzone.min.css');
     }
-  }
+  },
 };
