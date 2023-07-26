@@ -14,12 +14,12 @@ module.exports = {
   treeForVendor(vendorTree) {
     var dropzoneJs = new Funnel(
       path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
-      { files: ['dropzone.min.js'] }
+      { files: ['dropzone.min.js'] },
     );
 
     dropzoneJs = map(
       dropzoneJs,
-      (content) => `if (typeof FastBoot === 'undefined') { ${content} }`
+      (content) => `if (typeof FastBoot === 'undefined') { ${content} }`,
     );
 
     return vendorTree ? new MergeTrees([vendorTree, dropzoneJs]) : dropzoneJs;
@@ -31,7 +31,7 @@ module.exports = {
       {
         files: ['dropzone.min.css'],
         destDir: 'app/styles',
-      }
+      },
     );
 
     return styleTree ? new MergeTrees([styleTree, dropzoneCss]) : dropzoneCss;
