@@ -1,1 +1,1 @@
-export { default } from 'ember-cli-dropzonejs/components/drop-zone/component';
+export { default } from '@volldigital/ember-cli-dropzonejs/components/drop-zone/component';

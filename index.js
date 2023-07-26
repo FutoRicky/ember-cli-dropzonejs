@@ -9,7 +9,7 @@ var Funnel = require('broccoli-funnel');
 var map = require('broccoli-stew').map;
 
 module.exports = {
-  name: 'ember-cli-dropzonejs',
+  name: '@volldigital/ember-cli-dropzonejs',
 
   treeForVendor(vendorTree) {
     var dropzoneJs = new Funnel(
