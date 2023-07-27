@@ -1,5 +1,5 @@
 {
-  "name": "@volldigital/ember-cli-dropzonejs",
+  "name": "@voll/ember-cli-dropzonejs",
   "version": "2.0.0",
   "description": "Drag and drop file uploader addon using dropzonejs",
   "keywords": [

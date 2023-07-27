@@ -1,4 +1,4 @@
-# @volldigital/ember-cli-dropzonejs (fork of ember-cli-dropzonejs)
+# @voll/ember-cli-dropzonejs (fork of ember-cli-dropzonejs)
 Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dropzonejs.com/).
 
 Versions
@@ -14,7 +14,7 @@ Versions 0.8.6 <= are running ember-cli `1.13.8`
 
 Installation
 -------------
-`ember install @volldigital/ember-cli-dropzonejs`
+`ember install @voll/ember-cli-dropzonejs`
 
 This addon will use dropzone's default css by default. If you prefer to use your own css, add this option to your `ember-cli-build.js`:
 
