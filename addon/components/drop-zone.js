@@ -2,49 +2,62 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { assert } from '@ember/debug';
-import defaultOptions from 'dropzone/src/options';
 import Dropzone from 'dropzone';
+
+const _possibleEvents = Dropzone.prototype.events;
+
+// options found in https://docs.dropzone.dev/configuration/basics/configuration-options
+
+function eventArgify(e) {
+  return `on${e.charAt(0).toUpperCase() + e.slice(1)}`;
+}
 
 export default class DropZoneComponent extends Component {
   @tracked _myDropzone;
   @tracked _dropzoneOptions;
 
-  setEvents() {
-    const events = Dropzone.events;
-    const { _myDropzone } = this;
-    console.log({ _myDropzone });
-
-    for (let e in events) {
-      if (typeof events[e] !== 'undefined') {
-        _myDropzone.on(e, events[e]);
+  get _config() {
+    const { config = {}, ...args } = { ...this.args };
+    const output = { thumbnailHeight: null, thumbnailWidth: null, ...config };
+    Object.keys(args).forEach((e) => {
+      if (
+        !_possibleEvents.includes(eventArgify(e)) && // not a dropzone event
+        Object.prototype.hasOwnProperty.call(args, e) &&
+        typeof args[e] !== 'undefined'
+      ) {
+        output[e] = args[e];
       }
-    }
-  }
-
-  get _dzConfig() {
-    const { config = {} } = this.args,
-      output = {};
-
-    console.log({ defaultOptions });
-
-    Object.keys(defaultOptions).forEach((e) => {
-      // need to set null versions of thumbnail width / height
-      if (e === 'thumbnailHeight' || e === 'thumbnailWidth') output[e] = null;
-
-      // use dynamic hash first
-      // eslint-disable-next-line no-prototype-builtins
-      if (config.hasOwnProperty(e)) output[e] = config[e];
-
-      // if property is set specifically, override
-      // look at the arguments
-      if (typeof this.args[e] !== 'undefined') output[e] = this.args[e];
     });
 
     assert('Url is required for dropzone', output.url);
-    // Preserve defaults for existing apps/tests
     if (!output.url) output.url = '#';
 
     return output;
+  }
+
+  setEvents() {
+    const events = _possibleEvents.reduce((_events, e) => {
+      const eventArg = eventArgify(e);
+      if (
+        Object.prototype.hasOwnProperty.call(this.args, eventArg) &&
+        typeof this.args[eventArg] === 'function'
+      ) {
+        _events[e] = this.args[eventArg];
+      }
+
+      return _events;
+    }, {});
+
+    const { _myDropzone } = this;
+
+    for (const e in events) {
+      if (Object.prototype.hasOwnProperty.call(events, e)) {
+        _myDropzone.on(e, function () {
+          console.log(e, ...arguments);
+          return events[e](_myDropzone, ...arguments);
+        });
+      }
+    }
   }
 
   defineDropzoneOptions() {
@@ -73,7 +86,7 @@ export default class DropZoneComponent extends Component {
       dropzoneInstance.on('dragleave', onDrag.leave);
     };
 
-    const config = this._dzConfig;
+    const config = this._config;
 
     // these events will be overwritten
     config.dragenter = function () {};

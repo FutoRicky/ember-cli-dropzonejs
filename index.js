@@ -2,40 +2,8 @@
 /* jshint node: true */
 'use strict';
 
-var path = require('path');
-var MergeTrees = require('broccoli-merge-trees');
-var Funnel = require('broccoli-funnel');
-// eslint-disable-next-line n/no-unpublished-require
-var map = require('broccoli-stew').map;
-
 module.exports = {
   name: require('./package').name,
-
-  treeForVendor(vendorTree) {
-    var dropzoneJs = new Funnel(
-      path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
-      { files: ['dropzone.min.js'] },
-    );
-
-    dropzoneJs = map(
-      dropzoneJs,
-      (content) => `if (typeof FastBoot === 'undefined') { ${content} }`,
-    );
-
-    return vendorTree ? new MergeTrees([vendorTree, dropzoneJs]) : dropzoneJs;
-  },
-
-  treeForStyles(styleTree) {
-    var dropzoneCss = new Funnel(
-      path.join(this.project.root, 'node_modules', 'dropzone/dist/min'),
-      {
-        files: ['dropzone.min.css'],
-        destDir: 'app/styles',
-      },
-    );
-
-    return styleTree ? new MergeTrees([styleTree, dropzoneCss]) : dropzoneCss;
-  },
 
   included(app) {
     this._super.included.apply(this, arguments);
@@ -43,10 +11,10 @@ module.exports = {
       includeDropzoneCss: true,
     };
 
-    this.import('vendor/dropzone.min.js');
+    this.import('node_modules/dropzone/dist/min/dropzone.min.js');
 
     if (options.includeDropzoneCss) {
-      this.import('app/styles/dropzone.min.css');
+      this.import('node_modules/dropzone/dist/min/dropzone.min.css');
     }
   },
 };
