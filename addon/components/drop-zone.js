@@ -53,7 +53,6 @@ export default class DropZoneComponent extends Component {
     for (const e in events) {
       if (Object.prototype.hasOwnProperty.call(events, e)) {
         _myDropzone.on(e, function () {
-          console.log(e, ...arguments);
           return events[e](_myDropzone, ...arguments);
         });
       }
