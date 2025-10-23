@@ -1,181 +1,67 @@
-/* global Dropzone*/
-
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { assert } from '@ember/debug';
+import Dropzone from 'dropzone';
 
-export default Component.extend({
-  classNames: ['dropzone'],
+const _possibleEvents = Dropzone.prototype.events;
 
-  /**
-   * Dropzone dom element
-   * @private
-   * @type {[type]}
-   */
-  myDropzone: computed( function() {
-    return (typeof FastBoot === 'undefined') ? document.body : undefined;
-  }),
+// options found in https://docs.dropzone.dev/configuration/basics/configuration-options
 
-  /**
-   * internal configurtion for Dropzone method
-   * @private
-   * @type {[type]}
-   */
-  dropzoneOptions: null,
+function eventArgify(e) {
+  return `on${e.charAt(0).toUpperCase() + e.slice(1)}`;
+}
 
-  /**
-   * list of available properties
-   * @type {Array}
-   */
-  dzOptionsList: computed(function() {
-    return [
-      'url', 'withCredentials', 'method', 'parallelUploads', 'maxFilesize', 'filesizeBase',
-      'paramName', 'uploadMultiple', 'headers', 'addRemoveLinks', 'previewsContainer',
-      'clickable', 'maxThumbnailFilesize', 'thumbnailWidth', 'thumbnailHeight', 'maxFiles',
-      'createImageThumbnails', 'params', 'acceptedFiles', 'autoProcessQueue', 'forceFallback',
-      'previewTemplate', 'dictDefaultMessage', 'dictFallbackMessage', 'dictInvalidFileType',
-      'dictFallbackText', 'dictFileTooBig', 'dictResponseError', 'dictCancelUpload', 'timeout',
-      'dictCancelUploadConfirmation', 'dictRemoveFile', 'dictMaxFilesExceeded', 'maxDropRegion',
-      'dictUploadCanceled', 'dictRemoveFileConfirmation', 'dictFileSizeUnits'
-    ];
-  }),
+export default class DropZoneComponent extends Component {
+  @tracked _myDropzone;
+  @tracked _dropzoneOptions;
 
-  /**
-   * Configuration Hash to set dynamic properties
-   * @public
-   * @type {Object}
-   */
-  config: computed(function() {
-    return {};
-  }),
-
-  // Need to preserve null default values
-  thumbnailHeight: null,
-  thumbnailWidth: null,
-
-  // Events
-  // All of these receive the event as first parameter:
-  drop: null,
-  dragstart: null,
-  dragend: null,
-  dragleave: null,
-
-  //noops
-  dragenter() {},
-  dragover() {},
-
-  // All of these receive the file as first parameter:
-  addedfile: null,
-  removedfile: null,
-  thumbnail: null,
-  error: null,
-  processing: null,
-  uploadprogress: null,
-  sending: null,
-  success: null,
-  complete: null,
-  canceled: null,
-  maxfilesreached: null,
-  maxfilesexceeded: null,
-
-  // All of these receive a list of files as first parameter and are only called if the uploadMultiple option is true:
-  processingmultiple: null,
-  sendingmultiple: null,
-  successmultiple: null,
-  completemultiple: null,
-  canceledmultiple: null,
-
-  // Special events:
-  totaluploadprogress: null,
-  reset: null,
-  queuecomplete: null,
-  files: null,
-
-  // Callback functions
-  accept: null,
-
-  /**
-   * @private
-   * event management
-   */
-  setEvents() {
-    let myDropzone = this.get('myDropzone');
-    let events = {
-      drop: this.drop,
-      dragstart: this.dragstart,
-      dragend: this.dragend,
-      dragenter: this.dragenter,
-      dragover: this.dragover,
-      dragleave: this.dragleave,
-      addedfile: this.addedfile,
-      removedfile: this.removedfile,
-      thumbnail: this.thumbnail,
-      error: this.error,
-      processing: this.processing,
-      uploadprogress: this.uploadprogress,
-      sending: this.sending,
-      success: this.success,
-      complete: this.complete,
-      canceled: this.canceled,
-      maxfilesreached: this.maxfilesreached,
-      maxfilesexceeded: this.maxfilesexceeded,
-      processingmultiple: this.processingmultiple,
-      sendingmultiple: this.sendingmultiple,
-      successmultiple: this.successmultiple,
-      completemultiple: this.completemultiple,
-      canceledmultiple: this.canceledmultiple,
-      totaluploadprogress: this.totaluploadprogress,
-      reset: this.reset,
-      queuecomplete: this.queuecomplete,
-      files: this.files,
-      accept: this.accept,
-      renameFile: this.renameFile,
-    };
-
-    for (let e in events) {
-      if (events[e] !== null) {
-        myDropzone.on(e, events[e]);
-      }
-    }
-  },
-  /**
-   * internal config cp
-   * @private
-   * @return {[type]} [description]
-   */
-  _dzConfig: computed(function(){
-    let config = this.get('config'),
-        optList = this.get('dzOptionsList'),
-        output = {};
-
-    optList.forEach((e) => {
-      // use dynamic hash first
-      if (config.hasOwnProperty(e)) {
-        output[e] = config[e];
-      }
-
-      // if property is set specifically, override
-      if (this.get(e) != null) {
-        output[e] = this.get(e);
-      }
-
-      // need to set null versions of thumbnail width / height
-      if (e === 'thumbnailHeight' || e === 'thumbnailWidth') {
-        output[e] = this.get(e);
+  get _config() {
+    const { config = {}, ...args } = { ...this.args };
+    const output = { thumbnailHeight: null, thumbnailWidth: null, ...config };
+    Object.keys(args).forEach((e) => {
+      if (
+        !_possibleEvents.includes(eventArgify(e)) && // not a dropzone event
+        Object.prototype.hasOwnProperty.call(args, e) &&
+        typeof args[e] !== 'undefined'
+      ) {
+        output[e] = args[e];
       }
     });
 
     assert('Url is required for dropzone', output.url);
-    // Preserve defaults for existing apps/tests
-    if (!output.url) {
-      output.url = '#';
-    }
-    return output;
-  }),
+    if (!output.url) output.url = '#';
 
-  getDropzoneOptions() {
-    const onDragEnterLeaveHandler = function(dropzoneInstance) {
-      const onDrag = ( element => {
+    return output;
+  }
+
+  setEvents() {
+    const events = _possibleEvents.reduce((_events, e) => {
+      const eventArg = eventArgify(e);
+      if (
+        Object.prototype.hasOwnProperty.call(this.args, eventArg) &&
+        typeof this.args[eventArg] === 'function'
+      ) {
+        _events[e] = this.args[eventArg];
+      }
+
+      return _events;
+    }, {});
+
+    const { _myDropzone } = this;
+
+    for (const e in events) {
+      if (Object.prototype.hasOwnProperty.call(events, e)) {
+        _myDropzone.on(e, function () {
+          return events[e](_myDropzone, ...arguments);
+        });
+      }
+    }
+  }
+
+  defineDropzoneOptions() {
+    const onDragEnterLeaveHandler = function (dropzoneInstance) {
+      const onDrag = ((element) => {
         let dragEnteredEls = [];
 
         return {
@@ -184,14 +70,14 @@ export default Component.extend({
             element.classList.add('dz-drag-hover');
           },
           leave(event) {
-            dragEnteredEls = dragEnteredEls.filter(el => {
+            dragEnteredEls = dragEnteredEls.filter((el) => {
               return el !== event.target;
             });
 
             if (dragEnteredEls.length === 0) {
               element.classList.remove('dz-drag-hover');
             }
-          }
+          },
         };
       }).call(this, dropzoneInstance.element);
 
@@ -199,66 +85,70 @@ export default Component.extend({
       dropzoneInstance.on('dragleave', onDrag.leave);
     };
 
-    let config = this.get('_dzConfig');
+    const config = this._config;
 
     // these events will be overwritten
-    config.dragenter = function() {}
-    config.dragleave = function() {}
+    config.dragenter = function () {};
+    config.dragleave = function () {};
 
     config.init = function () {
       onDragEnterLeaveHandler(this);
     };
 
-    this.set('dropzoneOptions', config);
-  },
+    this._dropzoneOptions = config;
+  }
 
   createDropzone(element) {
-    let region = (this.get('maxDropRegion') && (typeof FastBoot === 'undefined')) ? document.body : element;
-    this.set('myDropzone', new Dropzone(region, this.dropzoneOptions));
-  },
+    const region =
+      this.maxDropRegion && typeof FastBoot === 'undefined'
+        ? document.body
+        : element;
+    this._myDropzone = new Dropzone(region, this._dropzoneOptions);
+  }
 
-  willDestroyElement() {
-    this.get('myDropzone').destroy();
-  },
+  willDestroy() {
+    super.willDestroy(...arguments);
+    this._myDropzone.destroy();
+  }
 
-  didInsertElement() {
-    let _this = this;
-    this.getDropzoneOptions();
+  @action
+  didInsert(element) {
+    this.defineDropzoneOptions();
+
     Dropzone.autoDiscover = false;
-    this.createDropzone(this.element);
+    this.createDropzone(element);
     //make sure events are set before any files are added
     this.setEvents();
 
     //this condition requires a fully resolved array to work
     //will not work with model.get('files') as it returns promise not array hence length condition is failed
     if (this.files && this.files.length > 0) {
-      this.files.map(function(file) {
-        let dropfile = {
+      this.files.map((file) => {
+        const dropfile = {
           name: file.get('name'),
           type: file.get('type'),
           size: file.get('size'),
           status: Dropzone.ADDED,
           //add support for id  in files object so that it can be access in addedFile,removedFile callbacks for files identified by id
-          id: file.get('id')
+          id: file.get('id'),
         };
-        let thumbnail = file.get('thumbnail');
+        const thumbnail = file.get('thumbnail');
 
-        if (typeof (thumbnail) === 'string') {
+        if (typeof thumbnail === 'string') {
           dropfile.thumbnail = thumbnail;
         }
 
-        _this.myDropzone.emit('addedfile', dropfile);
+        this._myDropzone.emit('addedfile', dropfile);
 
-        if (typeof (thumbnail) === 'string') {
-
-          _this.myDropzone.emit('thumbnail', dropfile, thumbnail);
+        if (typeof thumbnail === 'string') {
+          this._myDropzone.emit('thumbnail', dropfile, thumbnail);
         }
 
-        _this.myDropzone.emit('complete', dropfile);
-        _this.myDropzone.files.push(file);
+        this._myDropzone.emit('complete', dropfile);
+        this._myDropzone.files.push(file);
       });
     }
 
-    return this.myDropzone;
-  },
-});
+    return this._myDropzone;
+  }
+}

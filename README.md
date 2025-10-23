@@ -1,14 +1,11 @@
-# ember-cli-dropzonejs
-[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-dropzonejs.svg)](https://emberobserver.com/addons/ember-cli-dropzonejs)
-[ ![Codeship Status for FutoRicky/ember-cli-dropzonejs](https://app.codeship.com/projects/81fd6b80-1a72-0136-d790-5ac25dfa0b5f/status?branch=master)](https://app.codeship.com/projects/284304)
-
+# @voll/ember-cli-dropzonejs (fork of ember-cli-dropzonejs)
 Drag and drop file uploader addon for ember-cli using [Dropzonejs](http://www.dropzonejs.com/).
-
-[DEMO](http://futoricky.github.io/ember-cli-dropzonejs/)
 
 Versions
 -------------
-Current version is running ember-cli >= `3.5.0`
+Current version is running ember-cli >= `4.4.0`
+
+Versions 1.3.6 <= are running ember-cli >= `3.5.0`
 
 Versions 1.1.1 <= are running ember-cli `2.13.1`
 
@@ -17,7 +14,7 @@ Versions 0.8.6 <= are running ember-cli `1.13.8`
 
 Installation
 -------------
-`ember install ember-cli-dropzonejs`
+`ember install @voll/ember-cli-dropzonejs`
 
 This addon will use dropzone's default css by default. If you prefer to use your own css, add this option to your `ember-cli-build.js`:
 
